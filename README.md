@@ -8,7 +8,7 @@ workspace.
 
 ## Download
 
-Current public beta: `v0.6.2`
+Current public beta: `v0.6.3`
 
 - [Download for macOS Apple Silicon](https://github.com/mijren/tterminal-releases/releases/latest/download/tterminal-macos-aarch64.dmg)
 - [View all releases](https://github.com/mijren/tterminal-releases/releases)
