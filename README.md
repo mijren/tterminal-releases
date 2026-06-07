@@ -8,9 +8,9 @@ workspace.
 
 ## Download
 
-Current public beta: `v0.6.0`
+Current public beta: `v0.6.1`
 
-- [Download for macOS Apple Silicon](https://github.com/mijren/tterminal-releases/releases/latest/download/tterminal_0.6.0_aarch64.dmg)
+- [Download for macOS Apple Silicon](https://github.com/mijren/tterminal-releases/releases/latest/download/tterminal_0.6.1_aarch64.dmg)
 - [View all releases](https://github.com/mijren/tterminal-releases/releases)
 
 The app is not distributed through the App Store.
