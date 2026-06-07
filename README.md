@@ -48,6 +48,6 @@ https://github.com/mijren/tterminal-releases/releases/latest/download/latest.jso
 
 ## macOS Gatekeeper
 
-The current beta is not Apple Developer ID signed/notarized yet. macOS may show a
-Gatekeeper warning on first launch until signing and notarization are added to the
-release pipeline.
+Current public releases are Apple Developer ID signed and notarized. macOS may
+still show a normal first-launch confirmation for apps downloaded outside the App
+Store.
