@@ -13,8 +13,10 @@ notes and to-dos, and quick browser shortcuts to your running apps.
 <br/>
 
 [![Download for macOS — Apple Silicon](https://img.shields.io/badge/⬇%20Download%20for%20macOS-Apple%20Silicon-7a85ff?style=for-the-badge&labelColor=0a0c11)](https://github.com/mijren/tterminal-releases/releases/latest/download/tterminal-macos-aarch64.dmg)
+&nbsp;
+[![Visit tterminal.app](https://img.shields.io/badge/🌐%20Visit-tterminal.app-b07cff?style=for-the-badge&labelColor=0a0c11)](https://tterminal.app)
 
-Current public beta: `v0.6.3` &nbsp;·&nbsp; [All releases →](https://github.com/mijren/tterminal-releases/releases)
+Current public beta: `v0.6.3` &nbsp;·&nbsp; [tterminal.app](https://tterminal.app) &nbsp;·&nbsp; [All releases →](https://github.com/mijren/tterminal-releases/releases)
 
 ![macOS Apple Silicon](https://img.shields.io/badge/macOS-Apple%20Silicon-c3c8d6?style=flat-square&logo=apple&labelColor=0a0c11)
 ![Signed & notarized](https://img.shields.io/badge/signed%20%26%20notarized-22c08a?style=flat-square&labelColor=0a0c11)
@@ -56,6 +58,7 @@ juggling terminal tabs and start steering everything from one place.
 
 ## Download
 
+- **[tterminal.app](https://tterminal.app)** — the official website: features, screenshots, and the latest download.
 - **[Download for macOS Apple Silicon](https://github.com/mijren/tterminal-releases/releases/latest/download/tterminal-macos-aarch64.dmg)** — the current public beta DMG.
 - **[View all releases](https://github.com/mijren/tterminal-releases/releases)** — full version history and changelogs.
 
@@ -98,5 +101,5 @@ tterminal is built for local developer workflows.
 ---
 
 <div align="center">
-  <sub>© 2026 Kuwait Solutions Experts Company · <a href="https://kuwaitse.com">kuwaitse.com</a> · All rights reserved.</sub>
+  <sub><a href="https://tterminal.app"><strong>tterminal.app</strong></a> · © 2026 Kuwait Solutions Experts Company · <a href="https://kuwaitse.com">kuwaitse.com</a> · All rights reserved.</sub>
 </div>
