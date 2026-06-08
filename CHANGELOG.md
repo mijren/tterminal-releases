@@ -1,0 +1,184 @@
+---
+title: Changelog
+description: Product updates, release highlights, and upgrade notes for tterminal.
+---
+
+# Changelog
+
+Notable changes to tterminal are collected here for public release notes and
+website pages.
+
+Release entries should be written for users first: explain what changed, why it
+matters, and whether they need to do anything after updating.
+
+## Unreleased
+
+### Highlights
+
+- Sidebar section headers (Terminals, Commands, Agents, Browser shortcuts) now
+  open a card grid that summarizes everything in the section at a glance. Start,
+  stop, or restart each item right from its card, click a card to jump straight
+  to it, and use the "New ..." card to create one without digging through menus.
+
+### Improvements
+
+- Unified the to-do icon across the app: the sidebar, settings, add menu, and
+  todo board now all use the same rounded-checkbox icon instead of three
+  different glyphs.
+- Enlarged the sidebar section icons so each section reads more clearly in the
+  spine.
+- Running items in the new section grids stand out with a live accent stripe and
+  a glowing status dot, so active terminals, commands, and agents are easy to
+  tell apart from idle ones.
+- Softened the card hover shadow in light mode so hovering no longer looks like a
+  heavy black drop shadow.
+
+## v0.6.6 - Startup Splash and Todo Board
+
+_Release date: 2026-06-08_
+
+### Highlights
+
+- Added a Kanban-style todo board so project todos can be scanned, filtered,
+  edited, and moved through workflow columns without leaving the board.
+- Added a startup splash screen so tterminal shows a branded loading state while
+  the application finishes opening.
+
+### Features
+
+- Todo cards now support tags and priority metadata.
+- Todo cards open in an in-board modal for creating and editing title, status,
+  notes, tags, priority, and acceptance criteria.
+- Sidebar todo clicks now open the Kanban board and focus the selected todo in
+  the modal instead of switching to a standalone editor.
+- Kanban cards can be moved between Todo, In Progress, Blocked, and Done
+  columns with pointer-based drag movement.
+- Kanban card context menus now support copying a todo link and deleting the
+  card from the board.
+- MCP todo tools now support board review, direct tag replacement, and
+  acceptance-criteria checklist creation for agent-created todos.
+
+### Improvements
+
+- Redesigned the light theme ("Arctic Clean") with a cooler blue-white surface
+  palette, more visible separators, deeper text, and a vivid blue accent so the
+  interface reads cleaner and more legible in light mode. Dark mode is
+  unchanged.
+- Refreshed the todo board look: a gradient hero with a completion progress
+  bar and dotted count chips, status-tinted columns, cards with a state-colored
+  left stripe, priority pills, a hover lift, and a dedicated blocked banner, plus
+  a polished create/edit modal with an icon header.
+- Reworked scratchpads into a filterable library: opening Scratchpads now shows
+  a grid of every pad with a content preview, author, and edit time, plus search,
+  an All/Mine/Agents filter, and sorting. Right-click a card to copy its link or
+  delete it. The single-pad editor gets a fresh full-width header and a centered
+  "paper" writing column.
+- Set the native window and webview startup background to match the splash,
+  preventing a white flash before the app UI renders.
+- Todo board styling now follows the active light or dark theme.
+- App Settings now describes the expanded Kanban todo MCP surface and todo
+  sidebar behavior.
+
+### Fixes
+
+- Fixed todo card movement so dragged cards stay visible above columns and keep
+  the grabbed point aligned with the pointer.
+- Fixed todo card clicks after opening a todo from the sidebar so board cards
+  continue to open their edit modal reliably.
+- Fixed agent and command completion alerts so in-app notifications appear even
+  while tterminal is focused, including completions from other open projects.
+
+### Upgrade Notes
+
+- No action required after updating.
+
+## v0.6.5 - Agent Workflow Polish
+
+_Release date: 2026-06-07_
+
+### Highlights
+
+- Added a user preference for automatic update checks.
+- Improved agent launch behavior so newly added agents open directly in their
+  workspace pane.
+- Added pane-scoped agent renaming from the sidebar.
+- Improved live project indicators for active panes, including custom project
+  icons.
+
+### Improvements
+
+- Background update checks can now be disabled from App Settings.
+- Manual update checks remain available even when automatic checks are disabled.
+- Active project animations now use quieter borders and reduced glow.
+
+### Fixes
+
+- Fixed agent rename behavior by replacing the native prompt with an in-app
+  rename dialog.
+- Fixed live project dots that could disappear behind custom project images.
+
+### Upgrade Notes
+
+- Automatic update checks remain enabled by default. You can disable them from
+  App Settings while keeping manual update checks available.
+
+## v0.6.4 - Public Beta
+
+_Release date: TBD_
+
+### Highlights
+
+- Native macOS desktop command center for AI-assisted development.
+- Multi-pane terminal workspace for shells, project commands, and AI agent CLIs.
+- Agent presets for Claude, Codex, Cursor, Aider, Copilot, and custom tools.
+- Project rail and sidebar for switching projects, launching panes, and tracking
+  live activity.
+- Files, diffs, scratchpads, todos, and local MCP tools in one workspace.
+- Signed update flow using GitHub Releases and Tauri's updater.
+
+### Features
+
+- Start, stop, restart, and focus terminal panes from the sidebar.
+- Add multiple agent instances per project and distinguish them by pane label.
+- Monitor live CPU and memory usage for running panes.
+- Open project files and inspect git changes without leaving the app.
+- Store shared project commands in `tterminal.config.json`.
+- Keep local-only app settings and project state on the user's device.
+
+### Platform
+
+- macOS Apple Silicon public beta.
+- Distributed outside the Mac App Store through signed and notarized builds.
+- Public release assets are published through GitHub Releases.
+
+## Release Entry Template
+
+Use this template for each new public release.
+
+```md
+## vX.Y.Z - Release Name
+
+_Release date: YYYY-MM-DD_
+
+### Highlights
+
+- User-facing headline change.
+- User-facing headline change.
+- User-facing headline change.
+
+### Features
+
+- New capability or workflow.
+
+### Improvements
+
+- Existing workflow that became faster, clearer, or more reliable.
+
+### Fixes
+
+- Bug fix described in user-facing terms.
+
+### Upgrade Notes
+
+- Anything users need to know before or after updating.
+```
