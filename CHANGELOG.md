@@ -13,25 +13,7 @@ matters, and whether they need to do anything after updating.
 
 ## Unreleased
 
-### Highlights
-
-- Sidebar section headers (Terminals, Commands, Agents, Browser shortcuts) now
-  open a card grid that summarizes everything in the section at a glance. Start,
-  stop, or restart each item right from its card, click a card to jump straight
-  to it, and use the "New ..." card to create one without digging through menus.
-
-### Improvements
-
-- Unified the to-do icon across the app: the sidebar, settings, add menu, and
-  todo board now all use the same rounded-checkbox icon instead of three
-  different glyphs.
-- Enlarged the sidebar section icons so each section reads more clearly in the
-  spine.
-- Running items in the new section grids stand out with a live accent stripe and
-  a glowing status dot, so active terminals, commands, and agents are easy to
-  tell apart from idle ones.
-- Softened the card hover shadow in light mode so hovering no longer looks like a
-  heavy black drop shadow.
+No unreleased changes yet.
 
 ## v0.6.6 - Startup Splash and Todo Board
 
@@ -43,6 +25,10 @@ _Release date: 2026-06-08_
   edited, and moved through workflow columns without leaving the board.
 - Added a startup splash screen so tterminal shows a branded loading state while
   the application finishes opening.
+- Sidebar section headers (Terminals, Commands, Agents, Browser shortcuts) now
+  open a card grid that summarizes everything in the section at a glance. Start,
+  stop, or restart each item right from its card, click a card to jump straight
+  to it, and use the "New ..." card to create one without digging through menus.
 
 ### Features
 
@@ -78,6 +64,16 @@ _Release date: 2026-06-08_
 - Todo board styling now follows the active light or dark theme.
 - App Settings now describes the expanded Kanban todo MCP surface and todo
   sidebar behavior.
+- Unified the to-do icon across the app: the sidebar, settings, add menu, and
+  todo board now all use the same rounded-checkbox icon instead of three
+  different glyphs.
+- Enlarged the sidebar section icons so each section reads more clearly in the
+  spine.
+- Running items in the new section grids stand out with a live accent stripe and
+  a glowing status dot, so active terminals, commands, and agents are easy to
+  tell apart from idle ones.
+- Softened the card hover shadow in light mode so hovering no longer looks like a
+  heavy black drop shadow.
 
 ### Fixes
 
