@@ -15,7 +15,52 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
-## v0.6.6 - Startup Splash and Todo Board
+## v0.6.7
+
+_Release date: 2026-06-09_
+
+### Highlights
+
+- Section cards (Terminals, Commands, Agents, Browser shortcuts) are now live
+  tiles. Each card shows a preview of the program's most recent output in a
+  built-in console strip, plus a CPU gauge ring and live memory use, so you can
+  see what every process is doing at a glance without opening it.
+
+### Features
+
+- Section cards are color-coded by type — agents violet, terminals mint,
+  commands amber, browser shortcuts blue — across the top accent, glyph, status
+  dot, and CPU ring. The "New ..." card is pinned first in every section and
+  takes on the same type color when you hover it.
+- Todo tags are now normalized and reusable, so tags you have used before can be
+  reused across todos for quicker, more consistent tagging.
+- The todo modal's title is now a multi-line text area (it doubles as the
+  description); long titles truncate to two lines on the board, with the full
+  text shown when you open the card.
+
+### Improvements
+
+- The active and animated "live" borders now appear only on the projects rail
+  (the leftmost column), where the active project already shows an accent border,
+  activity bar, and pulsing live ring. The project sidebar no longer duplicates
+  these cues: the keyboard-focus glow on its edge and the animated border around
+  the project name at the top have been removed, leaving a single calm divider.
+- The card output preview always renders on a dark console surface, so it stays
+  readable even when you use a light terminal color theme. Section grids show
+  four cards per row at a consistent card size matching the scratchpad library.
+- The Kanban board now updates immediately when you add a todo from the sidebar
+  "+" button, instead of needing a project switch before the new card appears.
+- Dismissing the new-todo dialog without typing anything no longer leaves a
+  blank card behind; todo descriptions can also be left blank when you want one.
+- Todo board columns now scroll independently, so cards keep their full height
+  instead of shrinking as a column fills up.
+- Completed todos are no longer listed in the sidebar todo section, keeping it
+  focused on open work.
+- Moving through the sidebar with the arrow keys now carries a single highlight
+  with the cursor, instead of leaving the previously clicked item highlighted as
+  well.
+
+## v0.6.6
 
 _Release date: 2026-06-08_
 
@@ -88,7 +133,7 @@ _Release date: 2026-06-08_
 
 - No action required after updating.
 
-## v0.6.5 - Agent Workflow Polish
+## v0.6.5
 
 _Release date: 2026-06-07_
 
@@ -118,7 +163,7 @@ _Release date: 2026-06-07_
 - Automatic update checks remain enabled by default. You can disable them from
   App Settings while keeping manual update checks available.
 
-## v0.6.4 - Public Beta
+## v0.6.4
 
 _Release date: TBD_
 
@@ -152,7 +197,7 @@ _Release date: TBD_
 Use this template for each new public release.
 
 ```md
-## vX.Y.Z - Release Name
+## vX.Y.Z
 
 _Release date: YYYY-MM-DD_
 
