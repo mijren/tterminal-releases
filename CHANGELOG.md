@@ -15,6 +15,44 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.6.8
+
+_Release date: 2026-06-09_
+
+### Highlights
+
+- Improved launcher and pane focus behavior so starting, stopping, and
+  returning to commands or agents keeps you on the pane you were working with.
+- Project Settings now has clearer save state controls, including manual
+  refresh and Save now actions for fresh or empty projects.
+
+### Improvements
+
+- Agent grid card right-click menus now match the sidebar actions for renaming
+  and deleting panes.
+- Renaming an agent from its grid card now opens the same in-app rename dialog
+  used by the sidebar.
+- Browser shortcuts use the URL as a reliable identity, so editing or reloading
+  shortcuts is less likely to create duplicate or blank entries.
+- The terminal "Bottom" button now detects both xterm buffer position and the
+  actual viewport scroll position, so it appears more reliably when you land in
+  the middle of a long agent or terminal session.
+
+### Fixes
+
+- Fixed sidebar Start/Stop flows that could leave a command showing stale
+  stopped-session text until it was clicked again.
+- Fixed stopped commands or agents unexpectedly returning focus to the agent
+  section instead of staying on the pane that was just stopped.
+- Fixed browser shortcut creation on fresh projects when the shortcut label was
+  empty or derived from the URL.
+- Fixed project settings saves that could stay stuck on "saving" for empty
+  projects before a config file existed.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.6.7
 
 _Release date: 2026-06-09_
