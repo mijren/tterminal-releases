@@ -15,6 +15,30 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.1
+
+_Release date: 2026-06-11_
+
+### Highlights
+
+- Command palette navigation now starts with active terminals, so `Command-K`
+  can jump directly to running or starting panes.
+- The focused pane appears first in the Active terminals section, making it easy
+  to confirm where you are before switching elsewhere.
+
+### Fixes
+
+- Project sidebar reordering now uses a full dashed drop placeholder so the
+  destination is clear while dragging.
+- Sidebar section arrows and add buttons now only expand, collapse, or add; they
+  no longer navigate the workspace when clicked.
+- Project settings and agent selections are saved more reliably across machines
+  without interrupting typing or clearing user-entered values.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.0
 
 _Release date: 2026-06-11_
