@@ -15,6 +15,31 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.2
+
+_Release date: 2026-06-11_
+
+### Highlights
+
+- Agent availability now lives in App Settings as a global library. Projects can
+  add as many reusable or project-only agent entries as they need without
+  managing separate per-agent enable toggles.
+- Project Settings now keeps configuration sync controls in the Configuration
+  file section instead of showing a large sync banner on every settings page.
+
+### Improvements
+
+- The Add Agent picker now lists globally enabled agents directly and includes
+  quick links for project-only custom agents and the global agent library.
+- Project AI agent settings now show only agents saved for that project, with an
+  explicit empty state after all project agents are removed.
+- Deleting every project agent now persists as an empty project agent list
+  instead of repopulating from detected or proposed defaults.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.1
 
 _Release date: 2026-06-11_
