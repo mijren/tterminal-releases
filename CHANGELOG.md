@@ -15,6 +15,37 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.0
+
+_Release date: 2026-06-11_
+
+### Highlights
+
+- Improved the Files editor so opened files keep the intended CodeMirror layout,
+  syntax colors, gutters, and editor styling in the packaged desktop app.
+- Project launchers now restore more reliably after reopening a project,
+  including agents that were already assigned to that project.
+- New terminals and newly saved commands now open directly into their running
+  pane instead of leaving you on the section card grid.
+
+### Fixes
+
+- Fixed file previews that could render as plain line numbers followed by
+  unstyled text when the editor's runtime styles were not available quickly
+  enough.
+- Fixed configured project agents not appearing after removing and re-adding or
+  reopening a project.
+- Fixed the Terminals section "+" action so the new terminal becomes the active
+  workspace pane immediately.
+- Fixed the Commands "Save command" flow so the newly saved command starts and
+  opens immediately.
+- Fixed project reordering in the project rail and sidebar so dragging a project
+  no longer triggers the central file-drop overlay.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.6.8
 
 _Release date: 2026-06-09_
