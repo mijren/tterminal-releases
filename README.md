@@ -16,7 +16,7 @@ notes and to-dos, and quick browser shortcuts to your running apps.
 &nbsp;
 [![Visit tterminal.app](https://img.shields.io/badge/🌐%20Visit-tterminal.app-b07cff?style=for-the-badge&labelColor=0a0c11)](https://tterminal.app)
 
-Current public beta: `v0.6.8` &nbsp;·&nbsp; [tterminal.app](https://tterminal.app) &nbsp;·&nbsp; [All releases →](https://github.com/mijren/tterminal-releases/releases)
+Current public beta: `v0.6.9` &nbsp;·&nbsp; [tterminal.app](https://tterminal.app) &nbsp;·&nbsp; [All releases →](https://github.com/mijren/tterminal-releases/releases)
 
 ![macOS Apple Silicon](https://img.shields.io/badge/macOS-Apple%20Silicon-c3c8d6?style=flat-square&logo=apple&labelColor=0a0c11)
 ![Signed & notarized](https://img.shields.io/badge/signed%20%26%20notarized-22c08a?style=flat-square&labelColor=0a0c11)
