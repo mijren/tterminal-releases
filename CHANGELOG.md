@@ -15,6 +15,36 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.3
+
+_Release date: 2026-06-14_
+
+### Highlights
+
+- Project auto-start settings are now grouped by process type, matching the
+  sidebar order for agents, commands, and terminals.
+- Universal Terminal can now be minimized instead of closed, keeping the
+  session alive while its sidebar icon shows that it is still running.
+- Cross-project process notifications now surface completions, crashes, and
+  waiting agents even when you are working in another project.
+
+### Improvements
+
+- Routine Start and Stop actions are quieter; restart and bulk lifecycle
+  actions now show one focused update instead of a cascade of start/stop
+  messages.
+- Notification and toast View actions now preserve the exact target pane across
+  project switches, so clicking them lands on the agent or command that needs
+  attention.
+- Legacy project agents are migrated into the local agent store more safely, and
+  migrated agents can be started directly from the sidebar without deleting and
+  re-adding them.
+
+### Upgrade Notes
+
+- No action required after updating. Projects with legacy synced agents are
+  cleaned up locally the next time they are opened.
+
 ## v0.7.2
 
 _Release date: 2026-06-11_
