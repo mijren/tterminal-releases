@@ -15,6 +15,39 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.4
+
+_Release date: 2026-06-15_
+
+### Highlights
+
+- MCP agents can now hand work across projects, so a coordinator can start an
+  enabled agent in another local project and keep the child pane grouped in the
+  sidebar.
+- The project sidebar body has been redesigned into a denser command-tree
+  layout, making running panes, launchers, project views, and status cues easier
+  to scan together.
+- Project option toggles are now wired into the workspace, so project feature
+  settings immediately shape what the sidebar and workspace expose.
+
+### Improvements
+
+- Shell panes that are started outside the project root now still appear in the
+  sidebar Terminals list instead of disappearing from project context.
+- Notification clicks now focus only the pane they were created for, reducing
+  unexpected focus jumps when switching between projects.
+
+### Fixes
+
+- Legacy restored panes are cleaned up on project open so stale saved sessions
+  do not linger in the sidebar.
+- MCP-spawned orphan shells are now detected and closed more reliably when a
+  project is opened or reopened.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.3
 
 _Release date: 2026-06-14_
