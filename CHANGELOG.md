@@ -15,6 +15,34 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.5
+
+_Release date: 2026-06-18_
+
+### Highlights
+
+- Sidebar sections (Terminals, Agents, Commands, Todos, and more) are now shown
+  as distinct cards — each with a colored spine, a section icon, and its live RAM
+  total in the header — so the whole sidebar reads as one consistent system at a
+  glance. Cards collapse from the header, and per-row start/stop/restart controls
+  appear on hover.
+- The Changes view gained a real review workflow: mark files as viewed (tracked
+  by a progress ring in the header), group changes by folder, jump to the next
+  unviewed file, and switch between unified and side-by-side (split) diffs.
+
+### Improvements
+
+- Each section card and changed-file row shows a proportional +/− churn bar, and
+  a whole-project RAM total now sits above the section cards.
+- Long runs of unchanged context in a diff collapse to an expandable bar so large
+  files stay easy to scan.
+- The Files and Changes views at the top of the sidebar now match the section
+  cards; Changes highlights in amber only when there is something to review.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.4
 
 _Release date: 2026-06-15_
