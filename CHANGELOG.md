@@ -15,6 +15,36 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.6
+
+_Release date: 2026-06-18_
+
+### Highlights
+
+- Projects now restore their saved agents and terminals after closing and
+  reopening the app, so your workspace comes back with restartable panes instead
+  of forcing you to add everything again.
+- Notification clicks now route back to the exact project and agent pane that
+  produced the alert, even when macOS only reactivates the app instead of
+  delivering a direct notification-click callback.
+
+### Improvements
+
+- The startup splash screen now keeps the branding centered and avoids the
+  duplicate left-aligned logo/text while the app is starting.
+- Project Settings now shows a shorter, prioritized set of suggested commands
+  so the Commands page stays compact and focuses on common workflows like dev,
+  start, test, build, lint, typecheck, and migrations.
+
+### Fixes
+
+- Removing a project now clears its saved agent and terminal pane state, so
+  importing that project again starts clean as expected.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.5
 
 _Release date: 2026-06-18_
