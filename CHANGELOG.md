@@ -15,6 +15,31 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.7
+
+_Release date: 2026-06-20_
+
+### Highlights
+
+- The app's command overlays — the ⌘K command palette, the terminal and agent
+  launcher, and the prompt-template picker — now share one consistent design.
+  Each has the same header, row layout, status badges, and a new footer that
+  spells out the available keyboard shortcuts, so they all look and behave like
+  one system. The agent pickers in the sidebar were brought in line with the
+  same styling.
+
+### Fixes
+
+- Terminals that suddenly rendered with heavier, off-looking text (showing a
+  "CANVAS" badge in the corner) after the system reclaimed the GPU — for example
+  after the window sat in the background or moved between monitors — now recover
+  to crisp GPU rendering on their own when you return to the pane, instead of
+  staying degraded until you reopened it.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.6
 
 _Release date: 2026-06-18_
