@@ -15,6 +15,22 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.8
+
+_Release date: 2026-06-28_
+
+### Fixes
+
+- The project list no longer caps recent projects at 10, so adding more
+  projects keeps them visible and scrollable instead of hiding older entries.
+- Browser shortcuts can now stay enabled for any project type, including Python
+  projects, even before shortcut rows are added. The sidebar also exposes the
+  Browser shortcuts section so it is easier to open and configure those links.
+
+### Upgrade Notes
+
+- No action required after updating.
+
 ## v0.7.7
 
 _Release date: 2026-06-20_
