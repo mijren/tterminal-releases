@@ -15,6 +15,51 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.7.9
+
+_Release date: 2026-06-29_
+
+### Highlights
+
+- Agent panes can now show compact auto-summaries and state classifications in
+  the sidebar. Enable auto-summarization in App Settings -> Agents, choose the
+  summarizer tool, set the cadence, and tterminal will summarize recent terminal
+  activity after human input, quiet periods, or longer busy runs.
+- The file editor now highlights many more languages out of the box, expanding
+  beyond the previous core set to cover common web, backend, systems, config,
+  and scripting files.
+- Agents are easier to hand off between each other: process rows and cards can
+  copy a ready-to-use MCP reference so another agent can inspect the process
+  status and recent output without guessing the right command.
+
+### Improvements
+
+- Agent summary results now surface as sidebar state badges such as `IDLE`,
+  `PERMISSION`, `THINKING`, `WORKING`, and `ERROR`, with the latest summary used
+  as the agent's secondary context when available.
+- Auto-summarization runs through a bounded native headless command with a
+  timeout, captured output limits, configurable headless args, and `{prompt}`
+  placeholder support for CLIs that expect the prompt as an argument.
+- MCP process lookups can resolve copied process IDs across visible projects,
+  making cross-project frontend/backend agent coordination more reliable.
+- Copying a process reference from a row or card restores focus back to the
+  terminal pane that was active before the context menu opened.
+
+### Fixes
+
+- Closing a secondary project window no longer tears down every running PTY in
+  the app, so agents and commands survive normal window/project switching.
+- Removing a running agent now asks for confirmation before stopping and
+  removing it, reducing accidental loss of in-progress agent work.
+- Agents with nested subagents now prompt before closing descendants, so you can
+  choose whether to keep child agents running or close them with the parent.
+
+### Upgrade Notes
+
+- Auto-summarization is disabled by default. To use it, enable it in App
+  Settings -> Agents and choose a configured summarizer tool.
+- No migration is required for existing projects.
+
 ## v0.7.8
 
 _Release date: 2026-06-28_
