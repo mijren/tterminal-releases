@@ -15,6 +15,74 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.8.0
+
+_Release date: 2026-07-14_
+
+### Highlights
+
+- The sidebar is now one unified, scrollable workspace for every Project.
+  Projects keep their own Terminals, Agents, Commands, Browser shortcuts,
+  Todos, Scratchpads, Files, and Changes together, while the workspace follows
+  the row selected with the mouse or keyboard.
+- Processes can now be managed across Projects without first switching the
+  active workspace. Start, stop, restart, focus, search, and notification
+  actions preserve the exact Project, command, and pane they belong to.
+- Processes can be marked as favorites from the sidebar or command palette.
+  `Command-Shift-]` moves to the next favorite and `Command-Shift-[` moves to
+  the previous favorite in the sidebar's visible order, including stopped
+  Processes that can be started again.
+- Section headings now open card grids for Terminals, Agents, Commands, and
+  Browser shortcuts. Hold Command to reveal numbers, then press
+  `Command-1` through `Command-9` to activate the matching card or open its
+  browser link.
+
+### Improvements
+
+- Project Settings now opens inside the workspace from each Project header, so
+  the sidebar remains visible and usable while configuration is open.
+- Project switching is faster and more predictable: Project contexts, command
+  metadata, Git state, process rows, and workspace focus are cached and restored
+  independently.
+- Auto-start now plans launches per Project, reuses the correct stopped pane,
+  avoids duplicate agents and commands, and respects command trust before a
+  process starts.
+- Sidebar navigation uses one animated selection treatment for mouse and
+  keyboard input, smooth row movement, and consistent section ordering across
+  active and inactive Projects.
+- The terminal search and process palettes group results by Project and can
+  focus, start, or restart the exact matching pane across the whole workspace.
+- Project data access has been consolidated behind shared domain modules,
+  reducing duplicated filesystem, notes, Git, and configuration logic in Tauri
+  commands.
+- New Projects start with an empty Commands list instead of suggested commands,
+  leaving configuration clean until commands are explicitly added.
+
+### Fixes
+
+- Restarting a stopped or auto-started command now refreshes the same visible
+  pane instead of starting an older retained session in the background.
+- Starting a stopped agent in another Project now targets the selected instance
+  rather than a live or more recent sibling of the same agent type.
+- Sidebar wheel input is contained within the sidebar, so scrolling Project
+  Settings or long process lists no longer moves the workspace column with it.
+- Cross-project navigation now preserves the selected row, pane, focus region,
+  branch badge, RAM usage, and notification destination instead of falling back
+  to the first Project or process.
+- Running-process and favorite-process shortcuts now continue from the current
+  sidebar position and follow the visible top-to-bottom order.
+- Orphaned process panes can now be inspected and cleaned up instead of
+  remaining invisible after their Project or launcher disappears.
+- Universal Terminal keyboard input, restored pane cleanup, process lifecycle
+  races, and project-scoped start/restart behavior have been corrected.
+
+### Upgrade Notes
+
+- No project migration is required. Existing panes, favorites, Project order,
+  and sidebar preferences are retained.
+- The sidebar layout has changed substantially; review App Settings -> Sidebar
+  if you want to adjust subgroup order or visibility after updating.
+
 ## v0.7.9
 
 _Release date: 2026-06-29_
