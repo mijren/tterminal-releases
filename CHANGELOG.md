@@ -15,6 +15,29 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.0
+
+_Release date: 2026-07-15_
+
+### Highlights
+
+- The global process tabs, workspace split-tabs, and project rail are now the
+  permanent app interface. The previous unified-sidebar interface and its
+  experimental toggle have been removed.
+- Running terminal processes now remain owned by the native app when the web
+  interface reloads or the Mac wakes, then reconnect to their panes with
+  buffered output restored without duplication.
+- Upgrading from a pre-0.9 release performs a one-time cleanup of saved open
+  panes, tabs, and workspace layouts. Projects and their configured agents and
+  commands remain available in the rail, ready to open individually.
+
+### Improvements
+
+- Backslash searches every open process tab and workspace, whether running or
+  stopped, while Command-P selects the project in the rail and opens its menu.
+- Closing and stopping processes now use stable pane identities to avoid
+  duplicated tabs and repeated close actions.
+
 ## v0.8.0
 
 _Release date: 2026-07-14_
