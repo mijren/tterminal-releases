@@ -15,6 +15,42 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.1
+
+_Release date: 2026-07-15_
+
+### Highlights
+
+- Workspaces can now be named and saved per project, then launched again with
+  their chosen split layout and agents. Each project's launcher menu lists its
+  saved workspaces and provides rename and delete controls.
+- New agents expose a clear permission-mode choice, including the full
+  skip-permissions option. Preferred project agents remain saved and ready to
+  launch without being recreated for every session.
+
+### Improvements
+
+- Clicking a process, workspace, Todo, Scratchpad, Changes, or Editor tab now
+  moves keyboard focus into the selected surface. Clicking empty tab-bar space
+  also returns focus to the active pane or page.
+- Scratchpad and Todo navigation now places focus in the opened page instead of
+  leaving keyboard focus on the project rail.
+- Project configuration has been simplified by removing Auto Start controls in
+  favor of explicitly saved agents and reusable workspaces.
+
+### Fixes
+
+- Moving processes into workspaces or switching between process and workspace
+  tabs no longer causes repeated terminal reflows, duplicated text, or jumps to
+  the middle of scrollback.
+- Workspace rename actions now show the rename dialog and update both the saved
+  definition and any linked open workspace.
+
+### Upgrade Notes
+
+- No project migration is required. Existing projects, processes, and saved
+  configuration remain available after updating.
+
 ## v0.9.0
 
 _Release date: 2026-07-15_
