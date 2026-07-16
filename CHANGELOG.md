@@ -15,6 +15,70 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.2
+
+_Release date: 2026-07-16_
+
+### Highlights
+
+- Tabs moved into a vertical sidebar grouped by project. Only projects with
+  open tabs appear, each group shows its live RAM total, and the sidebar is
+  resizable. The horizontal tab strip is gone — labels no longer shrink, and
+  long tab lists scroll vertically.
+- A unified header band now spans the whole window with an at-a-glance
+  summary: how many processes are running, total RAM, and whether an agent
+  needs input. Clicking it opens the new Activity view — a cross-project grid
+  of every process with per-row stop, restart, and close, per-project
+  stop-all, and filters.
+- Notifications were rebuilt around one rule: if you can see the pane, nothing
+  fires; if the app is focused elsewhere, you get an in-app toast; only when
+  the app is in the background does a native banner appear. Stopping,
+  restarting, or closing a process — by you or by an agent — never reports as
+  a crash anymore.
+- Project menus were restructured: saved agents and commands are listed
+  directly in the menu (live ones jump to their tab, idle ones launch), and
+  the header gained quick actions — Reveal in Finder and Open in Editor with
+  a remembered editor preference.
+
+### Improvements
+
+- Keyboard-first navigation: Cmd+Left/Right walks between the project rail,
+  the tab sidebar, and the workspace, with a visible indicator showing which
+  column owns the keyboard. Arrow keys browse tabs with a live preview of
+  each window; Enter or Space drops you into the pane; stop/restart/close
+  shortcuts act on the highlighted tab while browsing.
+- Cmd+1–9 now follows the sidebar's visual top-to-bottom order and matches
+  the shortcut hints shown on each row.
+- Workspace split layouts have draggable dividers with double-click reset,
+  and their sizes persist.
+- Stopped tabs are restored across app relaunches by default; a new
+  "Restore stopped tabs on launch" toggle in Settings controls it.
+- Notification settings grew a master toggle, a per-command "Notify on
+  success" opt-in, per-pane muting, and the bell-sound choice now actually
+  applies to system notifications.
+- Agent "needs attention" detection was tightened so ordinary agent output no
+  longer triggers false alerts, while real permission prompts still do.
+
+### Fixes
+
+- Browsing the tab sidebar with arrow keys no longer loses keyboard focus to
+  the Changes or Editor pages — focus moves only when you commit.
+- A process that crashed while the window was reloading now notifies once
+  instead of being silently dropped.
+- Rapid repeated crashes collapse into a single "crashed N times in the last
+  30 s" notification instead of going quiet.
+- Relaunching a saved command no longer makes its tab flash into the wrong
+  group or renumber the Cmd+N hints for a frame.
+- Reordering a tab while another process starts or stops mid-drag no longer
+  moves the wrong tab.
+
+### Upgrade Notes
+
+- Cmd+1–9 numbering changed from flat tab order to the sidebar's grouped
+  order — muscle memory may need a beat to adjust.
+- Notifications now default to on (master toggle in Settings →
+  Notifications); success notifications remain opt-in per command.
+
 ## v0.9.1
 
 _Release date: 2026-07-15_
