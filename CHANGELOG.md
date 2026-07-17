@@ -15,6 +15,37 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.4
+
+_Release date: 2026-07-17_
+
+### Highlights
+
+- Fresh launches now open to a clean, blank workspace with keyboard focus in
+  the tabs sidebar, ready for immediate arrow-key navigation without a click.
+- Cmd+W now closes the active tab through the same safe lifecycle as its close
+  button instead of closing the entire application window.
+
+### Improvements
+
+- The tabs sidebar now owns real browser focus when selected, keeping keyboard
+  navigation reliable across restored processes and app reloads.
+
+### Fixes
+
+- Terminal output on macOS now defaults to the DOM renderer, avoiding corrupted
+  or overlapping glyphs caused by WebGL rendering on affected systems. Users
+  can still choose DOM or WebGL explicitly in terminal settings.
+- Fresh launches no longer restore workspace focus or reopen remembered pane
+  content after startup initialization completes.
+- The initial tab cursor is seeded after restored processes arrive, so keyboard
+  navigation works immediately even when process recovery finishes later.
+
+### Upgrade Notes
+
+- No project migration is required. Existing projects, saved commands,
+  processes, and workspaces remain available after updating.
+
 ## v0.9.3
 
 _Release date: 2026-07-17_
