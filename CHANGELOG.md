@@ -15,6 +15,49 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.3
+
+_Release date: 2026-07-17_
+
+### Highlights
+
+- The project rail is wider and now shows each project's icon and name in a
+  full-width row. The process sidebar is also wider and gives every process
+  more room, making projects and running work easier to scan.
+- Project launcher menus now open a focused command form for saving reusable
+  project presets. Project Settings and Remove moved into the header beside
+  Reveal in Finder and Open in Editor, while Editor and File changes are now
+  regular menu rows.
+- Git change totals are visible directly on projects and beside the Changes
+  page, so working-tree activity is clear before opening the view.
+
+### Improvements
+
+- Long project lists now scroll cleanly, support drag-edge auto-scrolling while
+  reordering, and keep keyboard-selected projects visible.
+- Launcher menus measure the available window space and shift upward when
+  opened from a project near the bottom. Tall menus scroll internally instead
+  of being clipped by the window edge.
+- Commands created from another project's launcher are saved to that project,
+  even when a different project is currently active.
+- Project menu action icons have consistent sizing and clearer Settings and
+  Remove affordances.
+
+### Fixes
+
+- Restored the known-good terminal renderer dependency versions, fixing the
+  regression where terminal content sometimes appeared stale until switching
+  windows.
+- Project reordering remains accurate with more than 15 projects instead of
+  overflowing the rail or losing off-screen drop targets.
+- Git change counts now update and remain visible in the project and process
+  sidebars.
+
+### Upgrade Notes
+
+- No project migration is required. Existing projects, saved commands,
+  processes, and workspaces remain available after updating.
+
 ## v0.9.2
 
 _Release date: 2026-07-16_
