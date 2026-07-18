@@ -15,202 +15,72 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
-## v0.9.4
-
-_Release date: 2026-07-17_
-
-### Highlights
-
-- Fresh launches now open to a clean, blank workspace with keyboard focus in
-  the tabs sidebar, ready for immediate arrow-key navigation without a click.
-- Cmd+W now closes the active tab through the same safe lifecycle as its close
-  button instead of closing the entire application window.
-
-### Improvements
-
-- The tabs sidebar now owns real browser focus when selected, keeping keyboard
-  navigation reliable across restored processes and app reloads.
-
-### Fixes
-
-- Terminal output on macOS now defaults to the DOM renderer, avoiding corrupted
-  or overlapping glyphs caused by WebGL rendering on affected systems. Users
-  can still choose DOM or WebGL explicitly in terminal settings.
-- Fresh launches no longer restore workspace focus or reopen remembered pane
-  content after startup initialization completes.
-- The initial tab cursor is seeded after restored processes arrive, so keyboard
-  navigation works immediately even when process recovery finishes later.
-
-### Upgrade Notes
-
-- No project migration is required. Existing projects, saved commands,
-  processes, and workspaces remain available after updating.
-
-## v0.9.3
-
-_Release date: 2026-07-17_
-
-### Highlights
-
-- The project rail is wider and now shows each project's icon and name in a
-  full-width row. The process sidebar is also wider and gives every process
-  more room, making projects and running work easier to scan.
-- Project launcher menus now open a focused command form for saving reusable
-  project presets. Project Settings and Remove moved into the header beside
-  Reveal in Finder and Open in Editor, while Editor and File changes are now
-  regular menu rows.
-- Git change totals are visible directly on projects and beside the Changes
-  page, so working-tree activity is clear before opening the view.
-
-### Improvements
-
-- Long project lists now scroll cleanly, support drag-edge auto-scrolling while
-  reordering, and keep keyboard-selected projects visible.
-- Launcher menus measure the available window space and shift upward when
-  opened from a project near the bottom. Tall menus scroll internally instead
-  of being clipped by the window edge.
-- Commands created from another project's launcher are saved to that project,
-  even when a different project is currently active.
-- Project menu action icons have consistent sizing and clearer Settings and
-  Remove affordances.
-
-### Fixes
-
-- Restored the known-good terminal renderer dependency versions, fixing the
-  regression where terminal content sometimes appeared stale until switching
-  windows.
-- Project reordering remains accurate with more than 15 projects instead of
-  overflowing the rail or losing off-screen drop targets.
-- Git change counts now update and remain visible in the project and process
-  sidebars.
-
-### Upgrade Notes
-
-- No project migration is required. Existing projects, saved commands,
-  processes, and workspaces remain available after updating.
-
-## v0.9.2
-
-_Release date: 2026-07-16_
-
-### Highlights
-
-- Tabs moved into a vertical sidebar grouped by project. Only projects with
-  open tabs appear, each group shows its live RAM total, and the sidebar is
-  resizable. The horizontal tab strip is gone — labels no longer shrink, and
-  long tab lists scroll vertically.
-- A unified header band now spans the whole window with an at-a-glance
-  summary: how many processes are running, total RAM, and whether an agent
-  needs input. Clicking it opens the new Activity view — a cross-project grid
-  of every process with per-row stop, restart, and close, per-project
-  stop-all, and filters.
-- Notifications were rebuilt around one rule: if you can see the pane, nothing
-  fires; if the app is focused elsewhere, you get an in-app toast; only when
-  the app is in the background does a native banner appear. Stopping,
-  restarting, or closing a process — by you or by an agent — never reports as
-  a crash anymore.
-- Project menus were restructured: saved agents and commands are listed
-  directly in the menu (live ones jump to their tab, idle ones launch), and
-  the header gained quick actions — Reveal in Finder and Open in Editor with
-  a remembered editor preference.
-
-### Improvements
-
-- Keyboard-first navigation: Cmd+Left/Right walks between the project rail,
-  the tab sidebar, and the workspace, with a visible indicator showing which
-  column owns the keyboard. Arrow keys browse tabs with a live preview of
-  each window; Enter or Space drops you into the pane; stop/restart/close
-  shortcuts act on the highlighted tab while browsing.
-- Cmd+1–9 now follows the sidebar's visual top-to-bottom order and matches
-  the shortcut hints shown on each row.
-- Workspace split layouts have draggable dividers with double-click reset,
-  and their sizes persist.
-- Stopped tabs are restored across app relaunches by default; a new
-  "Restore stopped tabs on launch" toggle in Settings controls it.
-- Notification settings grew a master toggle, a per-command "Notify on
-  success" opt-in, per-pane muting, and the bell-sound choice now actually
-  applies to system notifications.
-- Agent "needs attention" detection was tightened so ordinary agent output no
-  longer triggers false alerts, while real permission prompts still do.
-
-### Fixes
-
-- Browsing the tab sidebar with arrow keys no longer loses keyboard focus to
-  the Changes or Editor pages — focus moves only when you commit.
-- A process that crashed while the window was reloading now notifies once
-  instead of being silently dropped.
-- Rapid repeated crashes collapse into a single "crashed N times in the last
-  30 s" notification instead of going quiet.
-- Relaunching a saved command no longer makes its tab flash into the wrong
-  group or renumber the Cmd+N hints for a frame.
-- Reordering a tab while another process starts or stops mid-drag no longer
-  moves the wrong tab.
-
-### Upgrade Notes
-
-- Cmd+1–9 numbering changed from flat tab order to the sidebar's grouped
-  order — muscle memory may need a beat to adjust.
-- Notifications now default to on (master toggle in Settings →
-  Notifications); success notifications remain opt-in per command.
-
-## v0.9.1
-
-_Release date: 2026-07-15_
-
-### Highlights
-
-- Workspaces can now be named and saved per project, then launched again with
-  their chosen split layout and agents. Each project's launcher menu lists its
-  saved workspaces and provides rename and delete controls.
-- New agents expose a clear permission-mode choice, including the full
-  skip-permissions option. Preferred project agents remain saved and ready to
-  launch without being recreated for every session.
-
-### Improvements
-
-- Clicking a process, workspace, Todo, Scratchpad, Changes, or Editor tab now
-  moves keyboard focus into the selected surface. Clicking empty tab-bar space
-  also returns focus to the active pane or page.
-- Scratchpad and Todo navigation now places focus in the opened page instead of
-  leaving keyboard focus on the project rail.
-- Project configuration has been simplified by removing Auto Start controls in
-  favor of explicitly saved agents and reusable workspaces.
-
-### Fixes
-
-- Moving processes into workspaces or switching between process and workspace
-  tabs no longer causes repeated terminal reflows, duplicated text, or jumps to
-  the middle of scrollback.
-- Workspace rename actions now show the rename dialog and update both the saved
-  definition and any linked open workspace.
-
-### Upgrade Notes
-
-- No project migration is required. Existing projects, processes, and saved
-  configuration remain available after updating.
-
 ## v0.9.0
 
-_Release date: 2026-07-15_
+_Release date: 2026-07-18_
 
 ### Highlights
 
-- The global process tabs, workspace split-tabs, and project rail are now the
-  permanent app interface. The previous unified-sidebar interface and its
-  experimental toggle have been removed.
-- Running terminal processes now remain owned by the native app when the web
-  interface reloads or the Mac wakes, then reconnect to their panes with
-  buffered output restored without duplication.
-- Upgrading from a pre-0.9 release performs a one-time cleanup of saved open
-  panes, tabs, and workspace layouts. Projects and their configured agents and
-  commands remain available in the rail, ready to open individually.
+- A new three-surface workspace makes projects, open processes, and the active
+  terminal visible at the same time: the project rail stays on the left, the
+  resizable process sidebar groups tabs by project, and the main workspace
+  holds terminals, split workspaces, Editor, and Changes.
+- The unified global header reports running processes, total RAM, and agents
+  that need attention. Selecting it opens Activity, a cross-project view with
+  controls for every live process.
+- Named split workspaces can be saved per project and launched again with their
+  selected layout and agents. Workspace dividers are draggable, resettable,
+  and persisted.
+- Running processes remain owned by the native app across UI reloads and Mac
+  sleep/wake cycles, reconnecting with buffered output intact and without
+  duplication.
 
 ### Improvements
 
-- Backslash searches every open process tab and workspace, whether running or
-  stopped, while Command-P selects the project in the rail and opens its menu.
-- Closing and stopping processes now use stable pane identities to avoid
-  duplicated tabs and repeated close actions.
+- Project rows show only their Git file-change count; process activity is kept
+  in the process sidebar and Activity view instead of adding dots to projects.
+- Process groups follow the same project order as the project rail, including
+  after drag reordering. Long project lists scroll and auto-scroll while
+  dragging.
+- Project launcher menus list agents and commands directly, provide quick
+  Reveal in Finder and Open in Editor actions, and place Saved workspaces
+  directly below Browser shortcuts.
+- Keyboard navigation moves between the project rail, process sidebar, and
+  workspace with Command-Left/Right. Arrow keys preview tabs, Enter or Space
+  commits focus, and Command-1–9 follows visible sidebar order.
+- Backslash searches every process and workspace. Command-P selects a project
+  and opens its launcher menu.
+- Git change counts appear on project rows and the Changes page. Editor and
+  Changes are regular project menu actions.
+- Universal terminals run in the home directory as project-neutral tabs. When
+  selected, no project is highlighted in the project rail.
+- Notifications distinguish visible work, background work, user-requested
+  stops, and genuine crashes. Repeated crashes are grouped into one useful
+  notification.
+- Scratchpads and Todos, including their UI, settings, dependencies, desktop
+  commands, and MCP tools, have been removed. The MCP server remains focused on
+  process control, coordination locks, timers, and prompt templates.
+
+### Fixes
+
+- Command-W closes the active tab through the same safe lifecycle as its close
+  button instead of closing the application window.
+- Terminal output defaults to the stable DOM renderer on macOS, avoiding
+  corrupted or overlapping glyphs on affected systems.
+- Fresh launches open a clean workspace with keyboard focus in the process
+  sidebar, even when process recovery completes after the initial render.
+- Moving processes into split workspaces no longer causes duplicate terminal
+  text, repeated reflows, or jumps within scrollback.
+- Cross-project tab selection, drag reordering, and command launches retain the
+  correct project ownership and visible ordering.
+
+### Upgrade Notes
+
+- Upgrading from a pre-0.9 release performs a one-time cleanup of saved open
+  panes, tabs, and workspace layouts. Projects and configured agents and
+  commands remain available.
+- No project migration is otherwise required. Existing project files, running
+  processes, commands, agents, and saved workspaces remain available.
 
 ## v0.8.0
 
