@@ -15,6 +15,45 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.1
+
+_Release date: 2026-07-22_
+
+### Highlights
+
+- Command-Up/Down and Command-[ / ] now move only between running processes,
+  skipping stopped entries while preserving their normal arrow-key access in
+  the sidebar.
+- Agents can be renamed with F2 or from the process row's right-click menu.
+- The app now starts fresh installs in its dark Tide theme and uses one
+  consistent `tterminal` name and app mark across Welcome, loading, settings,
+  updates, macOS chrome, and packaged icons.
+
+### Improvements
+
+- Process selection uses one fixed, theme-aware accent instead of inheriting a
+  project's color. The sidebar now shows only the active placement highlight,
+  while project colors remain identity markers on their groups.
+- Development builds include a guarded Settings -> Developer action that clears
+  app-owned development data, stops running processes, and restarts into the
+  first-run experience without modifying project folders or project config.
+- Production and development app icons now match the Tide palette, while the
+  development icon retains its red status cursor for quick identification.
+
+### Fixes
+
+- Returning to tterminal after a background agent finishes no longer redirects
+  the workspace automatically. Navigation occurs only after clicking the
+  system notification or the in-app View action.
+- Sidebar keyboard movement no longer leaves both the previous selection and
+  the new cursor position highlighted at the same time.
+
+### Upgrade Notes
+
+- No project migration is required.
+- Existing saved theme preferences are retained. Dark is the default only for
+  fresh or reset app data.
+
 ## v0.9.0
 
 _Release date: 2026-07-18_
