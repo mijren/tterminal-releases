@@ -15,6 +15,38 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.2
+
+_Release date: 2026-08-10_
+
+### Highlights
+
+- Project groups in the process sidebar can now be collapsed without stopping
+  their processes. Collapse state is remembered across app restarts.
+- Project headers now show their custom icon and reveal quick actions for
+  Finder, the preferred code editor, project settings, and the project
+  launcher when hovered.
+- A busy process that temporarily stops reading terminal input no longer makes
+  typing lag in every other terminal or agent.
+
+### Improvements
+
+- New processes are grouped by type, keeping agents, terminals, and commands
+  easier to scan as a project grows.
+- Workspace pane drop targets are clearer and more reliable while rearranging
+  running processes.
+
+### Fixes
+
+- Closing a workspace now terminates the processes it owns instead of leaving
+  them running without a visible workspace.
+- Processes removed from a project remain removed after restarting the app.
+
+### Upgrade Notes
+
+- No project migration is required.
+- Existing processes continue running when their project group is collapsed.
+
 ## v0.9.1
 
 _Release date: 2026-07-22_
