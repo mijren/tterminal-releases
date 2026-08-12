@@ -15,6 +15,51 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.3
+
+_Release date: 2026-08-12_
+
+### Highlights
+
+- Command-Down and Command-Up now step through running processes in the order
+  the process sidebar shows them, from anywhere — including while you are
+  typing in a terminal. Previously they followed an internal launch order, so
+  the jump looked random once tabs or projects had been rearranged.
+- Project Settings saves as you type again. Edits could previously sit on
+  "saving" indefinitely, and only the Save now button committed them.
+- A command is approved once. Editing an approved command no longer asks for
+  approval again.
+
+### Improvements
+
+- Adding a command keeps its editor open while you type — the first keystroke
+  used to close it — and new commands start enabled, so they appear in the
+  project's launcher right away.
+- A project's commands now appear in its launcher menu without having to open
+  that project first, and stay current when its settings are edited from
+  elsewhere.
+- Project headers in the process sidebar no longer shift when hovered: the
+  quick actions fade in over the header instead of pushing its contents
+  around, and the header keeps a fixed height.
+- The collapse arrow on a project header now lines up with the group's spine,
+  and the first project clears the "TABS" keyboard hint.
+
+### Fixes
+
+- Opening project settings no longer leaves a process highlighted alongside
+  them, and Escape returns you to the tab you were on with its keyboard focus
+  restored.
+- An edit made immediately before closing Project Settings is no longer lost.
+
+### Upgrade Notes
+
+- No project migration is required.
+- Command approvals now survive edits to the command. This also means a
+  command definition changed by something other than you — an agent editing
+  `tterminal.config.json`, or a config that arrives with a branch — will not
+  ask to be reviewed again. Use "Reset trust" on a command in Project Settings
+  to require approval once more.
+
 ## v0.9.2
 
 _Release date: 2026-08-10_
