@@ -15,6 +15,66 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.4
+
+_Release date: 2026-08-16_
+
+### Highlights
+
+- Task Map: every project's todo list is now a kanban board ("Tasks" in the
+  project launcher) where AI agents work through tasks for you. Stage tasks
+  with acceptance criteria, assign an implementer and a reviewer to each, and
+  start them when ready — agents pick up the task prompt, report back with
+  comments, and move cards through To do → In progress → Needs review → Done.
+  Cards support drag and drop between columns, a skip-review option for small
+  tasks, and per-column clearing.
+- Commands can now close their tab automatically when they finish
+  successfully. Turn on "Close on success" for one-shot tasks like builds or
+  migrations: the completion notification fires first, then the tab tidies
+  itself away. Failures and manual stops keep the tab open so the output
+  stays inspectable.
+- Switching between the Tasks, Changes, and Editor pages is instant now.
+  Pages you have opened stay warm behind the workspace instead of reloading
+  their git scan or task list on every visit — and a rendering fix means an
+  open Changes page no longer slows the rest of the app down.
+
+### Improvements
+
+- Running processes gained a Restart hover control in the process sidebar —
+  stop and start fresh in one click, next to Stop and Close.
+- The bottom of the projects column repeats the three header shortcuts (add
+  project, universal terminal, app settings), so they are reachable from
+  either end of a long project list.
+- App Settings gained a Tasks section where the prompts given to task
+  implementers and reviewers can be customized and reset, without having to
+  know the underlying prompt-template tags.
+- Agent tabs are numbered per project now, and numbers are reused: the first
+  Claude in a project is "Claude" again even if other projects have their
+  own, and closing "Claude 2" frees that name for the next launch instead of
+  counting up forever.
+
+### Fixes
+
+- Arrow-key navigation in the process sidebar follows the visible order
+  everywhere, including across projects. Stepping onto another project's
+  pane or page switches to it directly — previously the highlight could skip
+  rows, land on the wrong tab, or show two selections at once.
+- Command-1 through Command-9 select the tab their sidebar number badge
+  actually points at; the shortcut order and the visible order could
+  previously disagree once a project had task agents or reordered groups.
+- Toggling "Notify on success", "Auto-restart", or restart file patterns on
+  a command saves immediately again — those switches previously looked saved
+  but only persisted after pressing Save now.
+- Commands that close their tab on success always deliver their completion
+  notification first, even for quick runs finishing under the usual
+  notification threshold.
+
+### Upgrade Notes
+
+- No project migration is required.
+- Task Map data lives in the existing per-project todos store; agents
+  interact with it through the MCP `todo_*` tools.
+
 ## v0.9.3
 
 _Release date: 2026-08-12_
