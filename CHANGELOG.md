@@ -15,6 +15,50 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.5
+
+_Release date: 2026-08-17_
+
+### Highlights
+
+- Task Map autopilot: hand a whole board to your agents and walk away. Tell an
+  agent which tool implements (say, Codex) and which reviews (say, Claude), and
+  tterminal works the queue one task at a time — implement, review, then the
+  next task whose dependencies are done. Failed tasks halt the run so nothing
+  builds on a broken step, and when the queue drains you get a summary of what
+  landed and what didn't. Runs keep going while you work in another project,
+  and each project can have its own.
+- Play and stop buttons on the task cards themselves. To do and Needs review
+  get a ▶; a running task gets a ■. A greyed-out ▶ always says why in its
+  tooltip — no implementer assigned, no reviewer, or still waiting on another
+  task.
+- Stopping a task in progress asks its agent to undo its work first. The agent
+  reverts what it changed, comments on what it rolled back, and hands the card
+  to To do — so a cancelled task leaves your working tree as it found it
+  rather than half-edited. Stopping a review just ends the review; the card
+  stays put for another run.
+- Plans can now name their agents up front: `todo_create_batch` accepts an
+  implementer and a reviewer per task, so a plan arrives with the right tool
+  already assigned to each piece of work.
+
+### Fixes
+
+- Task cards can be dragged between columns. Cards would lift but never drop,
+  so the board could only be reordered by editing a task.
+- Starting a task from the board now takes you to the agent it launches
+  instead of leaving you on the previous pane.
+- Opening another project's Tasks or Changes tab lands on that page on the
+  first click. It used to bounce you to the last agent you had open in that
+  project and need a second click.
+- Agents can be started for a project you are not currently looking at, and
+  agents that came from the global library or were found on your machine are
+  now visible to `list_available_agents` instead of appearing unconfigured.
+- Long prompts sent to a running agent — rollbacks, prompt templates — arrive
+  as one message and actually send, rather than landing in the composer split
+  across lines and waiting for you to press Enter.
+- A project parked on Tasks or Changes stays there after you click into
+  another project's agent.
+
 ## v0.9.4
 
 _Release date: 2026-08-16_
