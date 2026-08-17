@@ -15,6 +15,56 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.6
+
+_Release date: 2026-08-17_
+
+### Highlights
+
+- One sidebar. The project rail column is gone — its job moved into a
+  compact **Projects** dropdown at the top of the sidebar, giving the width
+  back to your terminals. The dropdown lists open projects first (with RAM,
+  a live status dot, and uncommitted-change counts) and the rest of your
+  recents below; clicking any project puts its section in the sidebar and
+  jumps straight to it. Projects that aren't open yet open on their Tasks
+  board — starting agents and terminals stays exactly where it was, on the
+  section's own controls.
+- Press `\` to open the Projects dropdown from anywhere, then ↑/↓ and Enter
+  to switch projects without touching the mouse. Tab/terminal search moved
+  to `⌘\` (both rebindable in Settings → Keyboard). Tiny colored dots on the
+  closed dropdown tell you at a glance when an agent in another project is
+  busy (pulsing) or waiting on you (amber).
+- The ⇅ button beside the dropdown opens manage mode: drag projects into the
+  order you want, ✕ removes one from the app. Esc or a click outside puts
+  everything away.
+- Workspace slots grew quick actions: every slot header now has Restart,
+  Stop, Eject, and Close side by side, so you can manage a process without
+  ejecting it back to the sidebar first. Stop keeps the tab around for
+  inspection; Close stops the process and frees the slot.
+
+### Task Map
+
+- Agents are now cleaned up the moment their card moves on. Tasks record
+  which phase their process serves, so an implementer whose card reached
+  Needs review (or Done) is stopped and unhooked even if the move happened
+  while you were in another project — no more closing leftover panes by
+  hand before a review can start. Dragging a card to the next column counts
+  too.
+- Starting a task from the board no longer yanks you to the new agent's
+  pane. The agent launches in the background — the toast and the card's
+  running marker confirm it — and you stay on the board to dispatch the
+  next card.
+- Task agents always start in the task's own project now. Previously, with
+  several projects and agents running, a dispatch could inherit the
+  project of whatever pane you happened to be focused on and implement in
+  the wrong checkout.
+- The initial prompt paste verifies itself. If an agent spawns but its
+  composer stays silent (startup dialogs and slow TUIs could swallow the
+  paste), tterminal re-pastes before submitting — killing and relaunching
+  the agent by hand shouldn't be needed anymore.
+- Boards refresh whenever you re-enter the Tasks page, and a board that is
+  still loading no longer masquerades as "No tasks yet".
+
 ## v0.9.5
 
 _Release date: 2026-08-17_
