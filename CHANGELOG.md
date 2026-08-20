@@ -15,6 +15,40 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.8
+
+_Release date: 2026-08-20_
+
+### Project configuration keeps itself in sync
+
+- **Browser shortcuts (and everything else in `tterminal.config.json`) now
+  sync themselves.** Editing the file in an editor, pulling it from git,
+  letting an agent write it, or changing it in a second window updates the
+  sidebar, the card grid and Project Settings on its own — no reopening
+  settings and pressing Save. Shortcuts belonging to a project that is open
+  but not active refresh too, so you no longer have to switch to a project to
+  see them.
+- Project Settings no longer parks on an "outdated" notice waiting for a
+  click. When the panel has nothing unsaved it simply takes the file's
+  version. If you are mid-edit when the file changes underneath you, it says
+  so and your edits still win — Refresh is the way back to what is on disk.
+
+### Cross-agent asks
+
+- Cross-agent asks now reach background projects reliably. Multiline messages
+  are delivered to Claude Code and other terminal agents as one paste and one
+  submission, and terminal write failures are reported on the exchange instead
+  of being silently dropped. `agent_ask_wait` resumes timed-out exchanges and
+  `conversations_list` exposes thread history; the obsolete handoff and
+  scratchpad MCP tools have been removed.
+- Agent context menus can copy a durable pane reference ready to paste into
+  another agent's instructions. New cross-agent asks announce who asked whom,
+  and both participating agent rows show an `ASK` badge until the exchange
+  completes.
+- Projects now accept incoming cross-agent asks by default and expose a
+  project-settings toggle to turn them off. Disabled projects clearly refuse
+  `agent_ask` calls without queuing a message or starting an agent pane.
+
 ## v0.9.7
 
 _Release date: 2026-08-20_
