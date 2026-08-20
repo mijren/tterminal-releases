@@ -15,6 +15,85 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.7
+
+_Release date: 2026-08-20_
+
+### Highlights
+
+- **Heavy sessions stay fast.** Running a lot of agents used to hit a wall:
+  everything slowed down at once, and switching between the Tasks board, a
+  task pane, and an agent pane became noticeably heavy. Every open terminal
+  held a GPU rendering context for the whole session, and past a limit the
+  system started taking them back — panes dropped to a much slower renderer
+  and stayed there, and every switch after that reclaimed one context by
+  taking it from another pane. Terminals now release their context while off
+  screen and pick one up when you look at them, so the limit stops being
+  reached at all.
+- Background terminals no longer redraw at full speed for nobody. Agents
+  streaming output behind the active tab still receive every byte — your
+  scrollback is exactly the same when you switch back — they just stop
+  repainting sixty times a second while hidden.
+- An idle window now costs nothing. The workspace used to re-render once a
+  second for the whole session whether or not anything was happening; it now
+  updates when a number you can actually see has changed. RAM figures step in
+  whole megabytes instead of flickering on noise below that.
+- The process monitor got much cheaper on a busy machine. It was reading
+  detailed information about every process on your computer once a second,
+  and walking each agent's process tree in a way that got slower as the
+  machine got busier — the exact moment you least want it to. Both now scale
+  with what tterminal is actually running.
+- Returning to the window is smooth again with many terminals open, and
+  switching panes does noticeably less work per switch.
+
+### Running two copies of tterminal
+
+- **A second instance can no longer take the MCP connection.** tterminal
+  serves MCP on one socket per user, and it used to claim that socket
+  unconditionally at startup. Opening a second copy — most often a
+  development build next to the installed app — silently took the connection
+  away from the first, which kept running but became unreachable. Every MCP
+  client was quietly rerouted to the newer copy, so agents started from the
+  older one were invisible to them, and agents started by the newer one died
+  with it when it closed.
+- Whichever copy has the connection keeps it. A second copy leaves it alone
+  and says so: App Settings → MCP names the instance that holds it, instead
+  of showing a bare "not listening".
+- That status is now honest in general. It used to be derived from a file
+  existing, which stayed true when the connection had died and when a
+  different copy owned it — so the indicator read healthy through exactly the
+  outage it was there to report.
+- `whoami` reports which copy of the app answered it, so an agent can tell
+  when it is talking to the wrong one.
+- **If you run a development build alongside the installed app**, the
+  development build will now come up without an MCP connection and show that
+  conflict, rather than taking the connection from the installed app. Quit
+  the installed app first if you want the development build to serve MCP.
+
+### Task Map
+
+- Restarting the app mid-run no longer wrecks the queue. Autopilot tracks its
+  agents in memory while the queue itself lives on disk, so a run resumed
+  after a restart was looking for agents the new process had never started —
+  concluded they had never launched, failed the task, and skipped every
+  remaining task in the queue. A restart is now recognised for what it is:
+  work lost with the previous instance, re-dispatched on the next pass.
+- The related error message no longer sends you hunting through your agent
+  configuration when the cause was the app restarting or a second instance
+  holding the MCP connection. It now says which of those to check.
+- Task cards keep working after a restart. A task's record of which agent is
+  working it could only be resolved during the session that started it, so
+  after a restart a card showed its agent as dead and its pane could never be
+  cleaned up. Tasks now store a handle that survives.
+
+### Fixes
+
+- A task agent winding down no longer piles up cleanup attempts. Every write
+  to the task file — and agents write it often — started another one against
+  the same pane.
+- The MCP connection no longer stops accepting clients after a single
+  transient error.
+
 ## v0.9.6
 
 _Release date: 2026-08-17_
