@@ -15,6 +15,92 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v0.9.9
+
+_Release date: 2026-08-21_
+
+### Several projects at once no longer cross wires
+
+Running four projects side by side, each with agents on the MCP server, hit
+three places where one project's work leaked into another's.
+
+- **An agent can no longer re-point another agent's project.** `select_project`
+  wrote a single machine-wide file that outranked each agent's own working
+  directory, so whichever agent called it last silently redirected every other
+  agent that had not named a project explicitly. The choice is now scoped to
+  the session that made it.
+- **Spawning and restarting now works for projects you are not looking at.**
+  Only the project currently open in the window ever performed these, while
+  the agent was told the action succeeded — so three of every four spawns
+  vanished into a reported success. They now run for whichever project asked.
+- **Actions that cannot be applied say so.** A spawn refused because a command
+  is awaiting trust review, or because no project is open, comes back as a
+  real error naming the reason instead of a silent no-op.
+- **A background agent can no longer launch work into the wrong checkout.**
+  `start_agent` inferred its parent from whatever pane you happened to be
+  focused on; it is now scoped to the project that asked.
+- Cross-agent `agent_ask` auto-start is verified too: a pane that could not be
+  restarted is reported offline immediately, instead of leaving your question
+  queued until it times out.
+
+### Settings tells you whether your agent CLIs are actually connected
+
+App Settings → MCP now checks each supported CLI and shows what it found.
+
+The one worth knowing about is **"Old helper path"**. Registering tterminal
+records the exact location of the helper inside the app bundle — and that
+location moves when you reinstall, move the app, or run a development build.
+The registration keeps pointing at the old one, nothing anywhere says so, and
+the failure eventually shows up as "the agent never started". One click
+repairs it.
+
+Rows also distinguish "not installed" from "not connected", and a check that
+simply failed never overwrites a badge that was green a moment ago.
+
+### Trust a whole project's commands at once
+
+Approving a dozen commands one dialog at a time was the most common reason a
+"start all", an autopilot run, or a delegated task stalled half-finished.
+**Trust all** is now offered both in the review dialog and in Project Settings
+→ Commands. It approves that project only, and it resumes everything that was
+waiting on the reviews it clears.
+
+### Copy from a remote editor into your clipboard
+
+Terminal programs can now put text on your system clipboard using OSC 52 —
+which is how yanking in a remote tmux or neovim over ssh finally reaches your
+machine. On by default; there is a toggle in App Settings → Terminal.
+
+Clipboard *reads* are never answered, on or off. Honoring one would hand
+whatever you last copied to any program that can write to a pane, including
+one on the far side of an ssh session.
+
+### Activity shows what is actually running
+
+The Activity overlay now shows CPU alongside memory, sorts by name, CPU, RAM
+or status, lists any ports a pane is listening on (click to open), and expands
+any pane running more than its own shell to show the processes inside it.
+
+### Drive tterminal from a script
+
+New: a local HTTP API and a **`tterminal` command-line tool** for anything that
+is not an MCP client — shell scripts, CI, a launcher.
+
+```sh
+tterminal status
+tterminal process list
+tterminal todo list --status in_progress
+```
+
+It listens on your machine only, on a port picked at startup, and every request
+needs a token the app generates and stores privately. The CLI reads both by
+itself, so there is nothing to configure. Requests coming from a web page are
+refused outright.
+
+See the new [HTTP API & CLI reference](../http-api.md) for every route and
+command. The CLI is not bundled with the app yet — build it with
+`cargo build --release -p tterminal-cli` and put it on your `PATH`.
+
 ## v0.9.8
 
 _Release date: 2026-08-20_
