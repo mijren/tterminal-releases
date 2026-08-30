@@ -11,9 +11,55 @@ website pages.
 Release entries should be written for users first: explain what changed, why it
 matters, and whether they need to do anything after updating.
 
-## Unreleased
+## v1.0.0
 
-No unreleased changes yet.
+_Release date: 2026-08-30_
+
+tterminal 1.0 — the first stable release. This round focuses on making the
+app feel fast and trustworthy at scale: a major performance overhaul for
+many-project workspaces, reliable Task Map autopilot, calmer and de-duplicated
+notifications, and a hardened HTTP API.
+
+- Added a Notifications setting to silence alerts when an agent is waiting for
+  input without disabling process completion or crash notifications.
+- Agent waiting notifications now fire at most once per waiting episode and no
+  longer repeat when a terminal pane remounts, reattaches to its PTY, asks to
+  notify through MCP, or is observed by more than one project window.
+- Stopped agent notifications from appearing after you watched the agent
+  finish and then switched panes or windows. Terminal focus reports and resize
+  redraws during a switch also no longer look like fresh agent activity.
+- Fixed Task Map autopilot falsely reporting “agent never started” when a pane
+  registered late or its timestamps were slightly out of order. Dropped agent
+  launches are now retried automatically before an attempt is consumed, and a
+  failed delivery retry no longer stops unrelated work prematurely.
+- Added a prompt-delivery watchdog to Task Map autopilot. If an agent pane
+  opens but never receives its task, tterminal now closes and relaunches only
+  that silent pane within 90 seconds, without spending a task attempt. Panes
+  with task output are left untouched, and the timeout is configurable.
+- Made HTTP API failures consistent for scripts: malformed or incomplete JSON
+  now returns the documented JSON error envelope, invalid todo statuses cannot
+  partially apply another field, and discovery includes example requests.
+- Activity now remembers whether subprocess trees should start expanded, with
+  an expand/collapse-all toggle beside the sort control.
+- Made project switching and live pane updates smoother by isolating the
+  sidebar, workspace, and window chrome, and by settling project config and Git
+  state together instead of redrawing the whole project view several times.
+- Reduced background rendering work in terminal panes, project recents, and
+  the Activity overlay so focus changes and unchanged process data stay idle
+  without disrupting terminal scrollback.
+- Improved sidebar responsiveness for people with many projects by avoiding
+  repeated launcher-menu construction and settings parsing during renders.
+- Kept the sidebar responsive during live RAM updates by avoiding a full
+  cross-project process-tree rebuild on every metrics sample.
+- Isolated live process titles, busy/attention state, summaries, and CPU/RAM
+  samples by pane, so one active process no longer redraws sibling panes or
+  the whole project window every second.
+- Limited live process-status sidebar updates to the affected project group
+  instead of reconciling every open project's rows.
+- Kept Tasks, Changes, and Files pages warm across recent project switches,
+  and while Project Settings is open, preserving drafts and scroll position
+  while rechecking retained content in the background when a project becomes
+  active again.
 
 ## v0.9.9
 
@@ -71,7 +117,7 @@ Terminal programs can now put text on your system clipboard using OSC 52 —
 which is how yanking in a remote tmux or neovim over ssh finally reaches your
 machine. On by default; there is a toggle in App Settings → Terminal.
 
-Clipboard *reads* are never answered, on or off. Honoring one would hand
+Clipboard _reads_ are never answered, on or off. Honoring one would hand
 whatever you last copied to any program that can write to a pane, including
 one on the far side of an ssh session.
 
