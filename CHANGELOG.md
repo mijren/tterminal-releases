@@ -11,6 +11,33 @@ website pages.
 Release entries should be written for users first: explain what changed, why it
 matters, and whether they need to do anything after updating.
 
+## v1.0.1
+
+_Release date: 2026-09-01_
+
+A new dark theme, plus three fixes to things that were slower or more broken
+than they looked.
+
+**Graphite — a new dark mode.** The previous dark theme, Tide, built its
+surfaces on a grayscale that was not actually gray: every step carried a
+strong blue cast, and since all panels, borders and text resolve through that
+scale, the whole app read as dark blue. Graphite replaces it with near-neutral
+surfaces and a turquoise accent. Beyond looking cleaner, it makes terminal
+output more accurate — a colored interface shifts how the terminal's own
+colors are perceived, and the terminal background is now fully neutral so
+those colors render true. **The light theme is unchanged in this release** and
+still carries its original blue-green cast, so the two no longer match; light
+gets the same treatment next.
+
+- Fixed Restart on an agent launched from a task killing it without bringing
+  it back. Restarting now respawns the agent as it always did for terminals
+  and launcher agents.
+- Kept large Task Maps responsive during redraws by resolving dependency
+  blockers once per board update and skipping unchanged card subtrees when
+  switching between panes.
+- Smoothed sidebar resizing: the drag handle no longer trails the cursor when
+  you move the mouse quickly.
+
 ## v1.0.0
 
 _Release date: 2026-08-30_
