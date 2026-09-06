@@ -11,6 +11,110 @@ website pages.
 Release entries should be written for users first: explain what changed, why it
 matters, and whether they need to do anything after updating.
 
+## v1.0.2
+
+**Universal Terminals disappear when closed.** They now have a separate,
+neutral group without project pins or settings. Closing the last one clears
+the group, including leftover home-directory pages and empty workspaces from
+older sessions.
+
+**Close an active project from its header.** The new × after the ⋯ button stops
+its processes and closes its panes, pages, and workspaces. The project leaves
+the active sidebar but stays saved in the Projects drawer. Its autopilot run
+is paused so it does not start another task while closing.
+
+**Empty browser shortcuts respond on the first click.** The Add shortcut dialog
+opens immediately and closes when cancelled or submitted, without waiting for
+an unrelated button click.
+
+**Project settings open from the empty start page.** Clicking a project's gear
+shows its settings immediately, without switching panes or pins. The empty
+workspace no longer displays a project name or branch before you select a
+surface.
+
+**Autopilot reports phase handoffs promptly.** A waiting coordinator now hears
+when implementation is ready for review, review requests rework, or a task
+finishes, without waiting for the 10-minute timeout. Workers are instructed to
+report completion before going idle, and the scheduler continues the next
+phase automatically.
+
+**No more "What do you want to start?" screen.** Starting something lives
+in the Projects drawer and the project ⋯ menu, so an empty workspace now
+just says so and points there. The drawer's launcher reads "Select an
+agent", "New terminal", and the project's commands.
+
+**Project settings are a popover now, not a page.** The gear on a project
+opens a compact panel beside it: change the icon, rename inline, copy the
+path or link, pick which editor and browser open things, toggle the file editor and
+incoming asks, or remove the project. The old settings page and its "Legacy local
+data" card are gone. Agents, commands, and browser shortcuts are managed
+from the project ⋯ menu: hover any row for edit and remove, and the command
+editor gained an **Advanced** fold for run-on-open, restart, file watching,
+working directory, and environment.
+
+**The sidebar shows only what is running.** Projects with nothing open no
+longer take up space as empty sections. They live behind a full-height
+**Projects** strip on the sidebar's edge — the badge counts them — and `\`
+or a click slides a drawer over the sidebar. Pick a project, choose what to
+start it with (an agent, a shell, or one of its commands), and it appears in
+the sidebar as the process starts. Close a project's last tab and it goes
+back to the drawer. The Projects dropdown and its sort mode are gone; drag a
+section's name to reorder the sidebar instead — a dashed slot shows where it
+will land.
+
+**Editor, Changes, Tasks and Browser are pinned under every active project**
+as a compact strip. Changes shows the Git file count, Tasks shows how many
+cards are open (hover for doing / review / todo), and Browser opens the
+project's shortcuts with an **Add shortcut…** that saves straight to the
+project config. Agents working on task cards are listed under their own
+**Tasks** label below the running processes. Right-click any of the four
+to hide it for that project; the ⋯ menu on the project name brings it back.
+`⌘1`–`⌘9` now number only processes and workspaces.
+
+**Fewer editor reloads during builds and agent work.** The editor now rereads
+the open file only when that file or an enclosing directory changes. Writes
+elsewhere in the project no longer repeatedly transfer the open document.
+Changes to the open file and returning to the editor still refresh it.
+
+**Less rendering work when agents are busy.** Running several
+agents at once used to make the whole app feel heavy — most of all when
+switching between panes, which is exactly when you least want to wait. Four
+things were behind it, and all four are fixed. Panes were re-measuring their
+scroll position on every write and every scrolled line, and each measurement
+forced the browser to re-lay-out a page the other panes had just changed;
+those checks are now done at most once a frame, and background panes skip them
+altogether. Background panes also repaint far less often. Switching to a pane
+was doing its most expensive work — rebuilding the GPU text atlas — twice per
+switch, and then immediately throwing away the atlas it had just built; now it
+happens once. And the two things that ran on every scrap of output from every
+pane, decoding it and scanning it for "this agent is waiting on you", both got
+much cheaper. Nothing about behaviour changes: same scrollback, same
+notifications, same titles.
+
+**Graphite, everywhere.** The light theme has been re-based onto the same
+palette as dark. Where it was "Sea Glass" — a teal-white ramp that gave every
+panel, border and label a blue-green tint — it now uses the graphite ramp
+inverted: one lightness curve, one hue, shared with dark mode, so the two
+themes finally read as one product. The accent stays the same turquoise,
+darkened step for step so it holds its contrast as text on white; every accent
+step is matched to the value it replaced, so nothing gets harder to read.
+
+Several surfaces that had been missed in the first Graphite pass are fixed
+too — the settings cards (which still sat on a navy gradient), the diff hunk
+and fold strips, the console preview inside section cards, and the theme
+preview mockups in Appearance settings, which were still painting the old
+navy. The terminal now uses the same neutral black in light mode as in dark,
+so terminal colors render identically whichever theme you are in.
+
+**Task agents are named after their task.** A pane working a task map card
+reads as `Task #7 · Implementer` / `Task #7 · Reviewer` rather than the agent
+runtime that happens to run it ("Claude 2"). Autopilot and the board's Assign
+already did this; now an orchestrator can too — `spawn_agent` / `start_agent`
+take a `todoId` (and optional `role`), which names the pane, assigns the card,
+and hands the agent the task's own implement/review briefing, so `prompt`
+becomes optional. The task name and its card lineage also survive a restart:
+restored task panes used to come back wearing the runtime's name.
+
 ## v1.0.1
 
 _Release date: 2026-09-01_
