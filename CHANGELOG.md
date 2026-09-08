@@ -11,93 +11,195 @@ website pages.
 Release entries should be written for users first: explain what changed, why it
 matters, and whether they need to do anything after updating.
 
+## Unreleased
+
+No unreleased changes yet.
+
+## v1.0.3
+
+### Highlights
+
+- **Cleaner quick panel.** Command+K groups compact process rows under clear
+  project headings, with indented child items and a subtle vertical guide. Each
+  project path is shown once. Smaller type and action labels replace repeated subtitles and badges.
+
+- **Picker selections open their pane.** Selecting a terminal, agent, or command
+  from Command+K or the command picker now brings its pane into view. Selecting a
+  stopped process also reveals the pane when restarting it.
+
+- **Project-scoped terminal picker.** Add terminal shows the workspace's own items
+  first. Use Other projects to choose another project's agents, commands, existing
+  terminals, or a new shell in that project.
+
+- **Tabbed workspaces.** Choose Tabbed when creating a workspace to group terminals
+  in a scrolling tab strip without the grid's slot limit. Add new terminals, move
+  existing ones into the group, or choose agents and commands. Background terminals
+  keep running, the selected tab is remembered, and saved tabbed workspaces can
+  reopen their shells and launchers. Each inner tab has a × close button, and
+  Command+Shift+Left/Right switches tabs within the active workspace.
+
+- **Less work during project switching.** Recent file watchers are reused,
+  watcher setup runs off the async runtime, and simultaneous configuration reads
+  are combined. Project-list metadata changes no longer trigger a full config
+  refresh.
+
+- **More useful performance recordings.** Whole-session counts and peaks survive
+  raw-sample eviction, percentile estimates remain available, and agent queue
+  samples distinguish busy agents, earlier exchanges, unavailable targets, and
+  pending delivery.
+
+- **Reliable task handoff scope.** Assignment prompts specify the Dev/release MCP
+  server and destination board path for verdicts and status updates. Missing-task
+  errors now identify the environment and project searched.
+
+- **Inactive project actions.** Hover a project in the Projects drawer and click Open to expand its agent
+  and command choices, or remove it immediately with ×. Project files are preserved.
+
+- **Live handoff counts.** Sidebar task counts now update when agents add or
+  advance tasks in another visible project, even before its board is opened.
+
+- **Start a new project directly.** Adding a folder selects its workspace and
+  opens the agent picker. Choose an agent or a custom command to start, without
+  the settings-first detour.
+
+- **Find installed editors.** Application and project settings now have searchable
+  editor lists with Refresh. Zed and other supported editors are detected in
+  Applications even without a command-line launcher. Added Windsurf, VSCodium,
+  and VS Code Insiders. Saved preferences remain visible if an editor is missing.
+
+- **Choose handoff agents.** Select a configured agent for the default implementer
+  or reviewer, or enter a custom agent ID. Project settings now offers explicit
+  feature switches and a Hide pinned shortcuts option. Disabled features disappear
+  from the sidebar and the project's show/hide menu.
+
+- **Record from the sidebar.** Dev keeps Start/Stop recording, slowdown markers,
+  export and expandable metrics above the workspace controls. The pane status bar
+  and sidebar footer now share the same height for a continuous bottom edge.
+
+- **Test in a separate Dev app.** Development builds have their own MCP connection,
+  boards, sessions and credentials, so release and Dev can run together. Dev MCP
+  setup uses a separate `tterminal-dev` registration.
+
+- **Record slowdowns.** Dev offers an optimized diagnostics build and an optional
+  performance recorder with slowdown markers, timing summaries and local JSON
+  export. Measure switching, MCP requests, agent waits and resource usage while
+  working in your projects.
+
 ## v1.0.2
 
-**Universal Terminals disappear when closed.** They now have a separate,
-neutral group without project pins or settings. Closing the last one clears
-the group, including leftover home-directory pages and empty workspaces from
-older sessions.
+### Highlights
 
-**Close an active project from its header.** The new × after the ⋯ button stops
-its processes and closes its panes, pages, and workspaces. The project leaves
-the active sidebar but stays saved in the Projects drawer. Its autopilot run
-is paused so it does not start another task while closing.
+- **Keep agent names stable.** Task agents keep their task number and implementer
+  or reviewer role instead of changing their displayed names. For other agents,
+  right-click and choose Lock agent name to preserve your chosen name across
+  terminal updates, agent rename requests, and app restarts. You can still rename
+  that agent yourself or turn automatic renaming back on.
 
-**Empty browser shortcuts respond on the first click.** The Add shortcut dialog
-opens immediately and closes when cancelled or submitted, without waiting for
-an unrelated button click.
+- **Hand tasks between projects.** Agents can discover projects and short agent
+  IDs, create linked tasks on another board, and queue them for implementation
+  and review. Progress and results return to the source task and agent. Task
+  cards now offer Hand off, and project settings lets you choose default workers
+  and opt into automatic execution. Existing paused runs stay paused, and retrying
+  the same handoff does not create duplicate tasks.
 
-**Project settings open from the empty start page.** Clicking a project's gear
-shows its settings immediately, without switching panes or pins. The empty
-workspace no longer displays a project name or branch before you select a
-surface.
+- **Copy a short agent ID.** Agent menus copy a compact `ag_` address that other
+  agents can resolve and use directly, replacing the long clipboard instructions.
 
-**Autopilot reports phase handoffs promptly.** A waiting coordinator now hears
-when implementation is ready for review, review requests rework, or a task
-finishes, without waiting for the 10-minute timeout. Workers are instructed to
-report completion before going idle, and the scheduler continues the next
-phase automatically.
+- **Task cards are easier to scan and read.** Larger titles, notes previews, and
+  separated metadata give the board more breathing room. Opening a task shows
+  formatted Markdown for notes, acceptance checklists, and comments in a wider
+  reading view. Use Edit to change the source, and write multiline comments
+  without losing the draft if posting fails.
 
-**No more "What do you want to start?" screen.** Starting something lives
-in the Projects drawer and the project ⋯ menu, so an empty workspace now
-just says so and points there. The drawer's launcher reads "Select an
-agent", "New terminal", and the project's commands.
+- **Project settings actions stay readable.** Copy path, Reveal in Finder, and Copy
+  link keep their labels on one line, including when a custom project icon adds
+  the Remove icon action.
 
-**Project settings are a popover now, not a page.** The gear on a project
-opens a compact panel beside it: change the icon, rename inline, copy the
-path or link, pick which editor and browser open things, toggle the file editor and
-incoming asks, or remove the project. The old settings page and its "Legacy local
-data" card are gone. Agents, commands, and browser shortcuts are managed
-from the project ⋯ menu: hover any row for edit and remove, and the command
-editor gained an **Advanced** fold for run-on-open, restart, file watching,
-working directory, and environment.
+- **Universal Terminals disappear when closed.** They now have a separate,
+  neutral group without project pins or settings. Closing the last one clears
+  the group, including leftover home-directory pages and empty workspaces from
+  older sessions.
 
-**The sidebar shows only what is running.** Projects with nothing open no
-longer take up space as empty sections. They live behind a full-height
-**Projects** strip on the sidebar's edge — the badge counts them — and `\`
-or a click slides a drawer over the sidebar. Pick a project, choose what to
-start it with (an agent, a shell, or one of its commands), and it appears in
-the sidebar as the process starts. Close a project's last tab and it goes
-back to the drawer. The Projects dropdown and its sort mode are gone; drag a
-section's name to reorder the sidebar instead — a dashed slot shows where it
-will land.
+- **Close an active project from its header.** The new × after the ⋯ button stops
+  its processes and closes its panes, pages, and workspaces. The project leaves
+  the active sidebar but stays saved in the Projects drawer. Its autopilot run
+  is paused so it does not start another task while closing.
 
-**Editor, Changes, Tasks and Browser are pinned under every active project**
-as a compact strip. Changes shows the Git file count, Tasks shows how many
-cards are open (hover for doing / review / todo), and Browser opens the
-project's shortcuts with an **Add shortcut…** that saves straight to the
-project config. Agents working on task cards are listed under their own
-**Tasks** label below the running processes. Right-click any of the four
-to hide it for that project; the ⋯ menu on the project name brings it back.
-`⌘1`–`⌘9` now number only processes and workspaces.
+- **Empty browser shortcuts respond on the first click.** The Add shortcut dialog
+  opens immediately and closes when cancelled or submitted, without waiting for
+  an unrelated button click.
 
-**Fewer editor reloads during builds and agent work.** The editor now rereads
-the open file only when that file or an enclosing directory changes. Writes
-elsewhere in the project no longer repeatedly transfer the open document.
-Changes to the open file and returning to the editor still refresh it.
+- **Project settings open from the empty start page.** Clicking a project's gear
+  shows its settings immediately, without switching panes or pins. The empty
+  workspace no longer displays a project name or branch before you select a
+  surface.
 
-**Less rendering work when agents are busy.** Running several
-agents at once used to make the whole app feel heavy — most of all when
-switching between panes, which is exactly when you least want to wait. Four
-things were behind it, and all four are fixed. Panes were re-measuring their
-scroll position on every write and every scrolled line, and each measurement
-forced the browser to re-lay-out a page the other panes had just changed;
-those checks are now done at most once a frame, and background panes skip them
-altogether. Background panes also repaint far less often. Switching to a pane
-was doing its most expensive work — rebuilding the GPU text atlas — twice per
-switch, and then immediately throwing away the atlas it had just built; now it
-happens once. And the two things that ran on every scrap of output from every
-pane, decoding it and scanning it for "this agent is waiting on you", both got
-much cheaper. Nothing about behaviour changes: same scrollback, same
-notifications, same titles.
+- **Autopilot reports phase handoffs promptly.** A waiting coordinator now hears
+  when implementation is ready for review, review requests rework, or a task
+  finishes, without waiting for the 10-minute timeout. Workers are instructed to
+  report completion before going idle, and the scheduler continues the next
+  phase automatically.
 
-**Graphite, everywhere.** The light theme has been re-based onto the same
-palette as dark. Where it was "Sea Glass" — a teal-white ramp that gave every
-panel, border and label a blue-green tint — it now uses the graphite ramp
-inverted: one lightness curve, one hue, shared with dark mode, so the two
-themes finally read as one product. The accent stays the same turquoise,
-darkened step for step so it holds its contrast as text on white; every accent
-step is matched to the value it replaced, so nothing gets harder to read.
+- **No more "What do you want to start?" screen.** Starting something lives
+  in the Projects drawer and the project ⋯ menu, so an empty workspace now
+  just says so and points there. The drawer's launcher reads "Select an
+  agent", "New terminal", and the project's commands.
+
+- **Project settings are a popover now, not a page.** The gear on a project
+  opens a compact panel beside it: change the icon, rename inline, copy the
+  path or link, pick which editor and browser open things, toggle the file editor and
+  incoming asks, or remove the project. The old settings page and its "Legacy local
+  data" card are gone. Agents, commands, and browser shortcuts are managed
+  from the project ⋯ menu: hover any row for edit and remove, and the command
+  editor gained an **Advanced** fold for run-on-open, restart, file watching,
+  working directory, and environment.
+
+- **The sidebar shows only what is running.** Projects with nothing open no
+  longer take up space as empty sections. They live behind a full-height
+  - **Projects** strip on the sidebar's edge — the badge counts them — and `\`
+  or a click slides a drawer over the sidebar. Pick a project, choose what to
+  start it with (an agent, a shell, or one of its commands), and it appears in
+  the sidebar as the process starts. Close a project's last tab and it goes
+  back to the drawer. The Projects dropdown and its sort mode are gone; drag a
+  section's name to reorder the sidebar instead — a dashed slot shows where it
+  will land.
+
+- **Editor, Changes, Tasks and Browser are pinned under every active project**
+  as a compact strip. Changes shows the Git file count, Tasks shows how many
+  cards are open (hover for doing / review / todo), and Browser opens the
+  project's shortcuts with an **Add shortcut…** that saves straight to the
+  project config. Agents working on task cards are listed under their own
+  - **Tasks** label below the running processes. Right-click any of the four
+  to hide it for that project; the ⋯ menu on the project name brings it back.
+  `⌘1`–`⌘9` now number only processes and workspaces.
+
+- **Fewer editor reloads during builds and agent work.** The editor now rereads
+  the open file only when that file or an enclosing directory changes. Writes
+  elsewhere in the project no longer repeatedly transfer the open document.
+  Changes to the open file and returning to the editor still refresh it.
+
+- **Less rendering work when agents are busy.** Running several
+  agents at once used to make the whole app feel heavy — most of all when
+  switching between panes, which is exactly when you least want to wait. Four
+  things were behind it, and all four are fixed. Panes were re-measuring their
+  scroll position on every write and every scrolled line, and each measurement
+  forced the browser to re-lay-out a page the other panes had just changed;
+  those checks are now done at most once a frame, and background panes skip them
+  altogether. Background panes also repaint far less often. Switching to a pane
+  was doing its most expensive work — rebuilding the GPU text atlas — twice per
+  switch, and then immediately throwing away the atlas it had just built; now it
+  happens once. And the two things that ran on every scrap of output from every
+  pane, decoding it and scanning it for "this agent is waiting on you", both got
+  much cheaper. Nothing about behaviour changes: same scrollback, same
+  notifications, same titles.
+
+- **Graphite, everywhere.** The light theme has been re-based onto the same
+  palette as dark. Where it was "Sea Glass" — a teal-white ramp that gave every
+  panel, border and label a blue-green tint — it now uses the graphite ramp
+  inverted: one lightness curve, one hue, shared with dark mode, so the two
+  themes finally read as one product. The accent stays the same turquoise,
+  darkened step for step so it holds its contrast as text on white; every accent
+  step is matched to the value it replaced, so nothing gets harder to read.
 
 Several surfaces that had been missed in the first Graphite pass are fixed
 too — the settings cards (which still sat on a navy gradient), the diff hunk
@@ -106,14 +208,14 @@ preview mockups in Appearance settings, which were still painting the old
 navy. The terminal now uses the same neutral black in light mode as in dark,
 so terminal colors render identically whichever theme you are in.
 
-**Task agents are named after their task.** A pane working a task map card
-reads as `Task #7 · Implementer` / `Task #7 · Reviewer` rather than the agent
-runtime that happens to run it ("Claude 2"). Autopilot and the board's Assign
-already did this; now an orchestrator can too — `spawn_agent` / `start_agent`
-take a `todoId` (and optional `role`), which names the pane, assigns the card,
-and hands the agent the task's own implement/review briefing, so `prompt`
-becomes optional. The task name and its card lineage also survive a restart:
-restored task panes used to come back wearing the runtime's name.
+- **Task agents are named after their task.** A pane working a task map card
+  reads as `Task #7 · Implementer` / `Task #7 · Reviewer` rather than the agent
+  runtime that happens to run it ("Claude 2"). Autopilot and the board's Assign
+  already did this; now an orchestrator can too — `spawn_agent` / `start_agent`
+  take a `todoId` (and optional `role`), which names the pane, assigns the card,
+  and hands the agent the task's own implement/review briefing, so `prompt`
+  becomes optional. The task name and its card lineage also survive a restart:
+  restored task panes used to come back wearing the runtime's name.
 
 ## v1.0.1
 
