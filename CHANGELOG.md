@@ -15,6 +15,297 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v1.1.0
+
+### Highlights
+
+- **Features are worktrees.** The sidebar now lists projects › features. Each
+  feature is its own git worktree with a generated name (rename any time), its
+  own branch, browser URL, plan and tasks. Create one from the `+` next to a
+  project; setup scripts (copy `.env`, install, `herd link`, an optional
+  per-feature database) run as a visible pane.
+
+- **Per-workspace tab bars.** Every project and feature keeps its own tabs:
+  terminals, agents, editor files, Changes, History, Plan, Tasks and Browser.
+  Split any two panes side by side; the columns and tabs stay clearly separated.
+
+- **Files, Changes and History panel.** A third column browses the worktree,
+  shows uncommitted or since-base changes with per-file revert, and lists the
+  branch's commits. *Review all* opens a GitHub-style stacked diff with
+  viewed marks that reset when a file changes.
+
+- **In-app browser.** Native browser panes with device presets, a responsive
+  drag edge, screenshots to the clipboard, and a Compare tab that shows the
+  main checkout and the feature side by side.
+
+- **Plan → tasks → review.** Each feature has a Plan tab (`.tterminal/plan.md`)
+  with *Plan with …*, *Create tasks with …* and *Review all with …*. Tasks belong
+  to a feature and their agents run inside its worktree; a feature shows
+  **reviewed** once the plan carries a review and no task is open. Project
+  settings define Planner, Implementer and Reviewer agents; App Settings › Tasks
+  holds the editable prompt templates.
+
+- **Finish in three stages.** The panel header walks *Pull request → Merge →
+  Archive* in order: the Implementer opens the PR with `gh`, Merge runs
+  `gh pr merge` (rebase by default, per-project strategy) and fast-forwards the
+  main checkout — or, without a pull request, the Implementer commits what is
+  left, rebases onto the base and fast-forwards it locally — and Archive runs
+  the archive scripts, deletes the worktree and branch, and keeps a one-line
+  history entry. Merge conflicts offer *Rebase with agent*.
+
+- **Project settings in one place.** The project's gear (or ⌘⇧,) opens a
+  modal with everything the project owns: General, Commands, Agents (with
+  the Planner / Implementer / Reviewer / Git operations roles), Instructions (per-project
+  workflow prompt overrides and prompt templates), Worktrees, Browser and
+  Environment. Changes collect in a draft and
+  save together with Save (⌘S); Discard drops them. General also decides
+  what happens to tterminal.config.json in git: commit it on every save,
+  keep it ignored, or leave it to you.
+
+- **Diagnostics.** The bug icon in the sidebar footer opens a panel with the
+  build and machine facts, the app's current state, a performance recorder
+  (Dev builds), live app and frontend logs, and a Report section that saves
+  or copies one Markdown report describing the problem with all of the above.
+
+- **Setup and archive run in the background.** No terminal pane opens for a
+  feature's setup or archive commands; the row shows *setting up* or
+  *archiving…* (disabled) meanwhile, and a failure surfaces as a toast with
+  the last lines of output.
+
+- **Project environment applies everywhere.** Project settings › Environment
+  variables (shared in the repo, or private to this machine) reach every
+  terminal, command and agent the project starts, feature worktrees
+  included; a command's own env still wins.
+
+- **Local HTTPS in the browser tab.** Herd / Valet `.test` sites (and other
+  hosts that can only be local) render even when macOS does not trust their
+  certificate; other hosts keep the normal checks.
+
+- **Browser Inspector and dev inspector removed.** The bookmarklet, the Chrome
+  extension, the setup page and the Integrations settings section are gone,
+  and so is the dev-only in-app annotation overlay with its MCP tools; the
+  built-in browser tab, review comments and the Diagnostics panel cover that
+  ground.
+
+- **Menu bar item.** Shows how many agents are waiting for you and lists
+  projects › features; pick one to jump to it. Toggle it in App Settings.
+
+- **MCP.** Tasks carry `featureBranch`; sessions inside a feature default to it
+  and `identify_session` reports it. New tools: `feature_list`, `feature_get`,
+  `plan_get`, `plan_update`.
+
+### Improvements and fixes
+
+- Shorter buttons in a feature's Ship step, so their labels no longer get cut off: **Merge** (instead of "Merge PR #n"), **↻ Checks** (instead of "Re-run checks") and **PR** (instead of "Open PR"). Retrying after failed checks or a merge conflict shows **↻ Checks** or **↻ Merge** instead of "Re-run checks" / "Retry merge". Hover a button for its full description.
+
+- **Checks and Review on the main project.** When you work directly on main, the Workflow panel now runs in four steps: Changes → Checks → Review → Push. **Checks** runs the same lint and test commands a feature runs before its pull request. **Review** hands your reviewer every commit you haven't pushed yet (plus uncommitted changes); it fixes what's in scope as a new commit and writes its findings into the Plan, and tterminal remembers what was reviewed so the next review only covers new commits. Nothing blocks you: **Push** just asks first when checks are failing or commits haven't been reviewed. Feature branches get Changes → Review → **Ship**, where Ship runs the checks and then the pull request → merge → archive steps: the review covers every commit on the branch, and Create pull request asks first if some haven't been reviewed (checks still have to pass before a pull request, as before).
+
+- **Set your roles once for every project.** App Settings › Agents has a new **Default roles** card: choose the Planner, Implementer, Reviewer and Git agent (with model and effort) once, and every project uses them unless it picks its own for a role. In a project you've already set up, **Make these my defaults** (Project settings › Agents › Roles) copies its roles over in one click. Roles a project inherits read "Default: …".
+
+- **Pick the model and effort for each agent.** In Project settings › Agents, every role (Planner, Implementer, Reviewer, Git operations) now has a model and an effort level under its agent — for example Reviewer = Codex · GPT-6.1-Sol · high — and Plan with…, Review all with…, the pull request and merge stages start the agent on exactly that. Codex's model list comes live from the Codex CLI you're signed in to (**Refresh models** re-reads it); Claude offers Fable, Opus, Sonnet and Haiku (always the newest) plus the current versions. In the + menu, Claude and Codex start on the model you used last, and their › lets you pick another model and effort before starting.
+
+- **tterminal now supports Claude Code and Codex only.** The agent library, the Add agent picker, role pickers, the Welcome screen and MCP setup offer just these two (MCP setup also keeps Claude Desktop). Cursor, Aider, Kimi, Gemini, OpenCode and custom agents are gone, and you can no longer add a custom agent; you can still change where Claude Code and Codex are installed and their default arguments. Agent launchers for other tools saved in a project's `tterminal.config.json` or on this Mac are left in place but no longer appear. Cursor stays available as an editor for "Open in editor".
+
+- **Plan and Messages are always there.** Every project and feature now opens with two fixed icon tabs at the start of the tab bar: Plan and Messages. They can't be closed, and your agents, terminals and commands follow them. **Messages** is the record of agents talking to each other: every question or task an agent here sent to, or received from, another agent (in this project or another one), with a one-line summary, who asked whom, the status, and the reply. Select one to read the whole thread; the agents online right now are listed underneath. `⌘⌥1`–`⌘⌥9` still start at your first own tab.
+
+- **Plans are now phases and steps.** The Plan tab shows a title, a goal and numbered phases, each with a short description and a checklist of steps. Agents write the plan through tterminal's `plan_update` tool and tick steps off with `plan_step` as they work, so you can see at a glance which phase is in progress and how far along it is. You can edit, reorder, tick and delete phases and steps yourself; the goal and each phase's description open in a Markdown editor with a formatting toolbar (headings, bold, italic, lists, checklists, links, code) and a preview, and the plan now uses the full width of the window. Plans are stored in each workspace's `.tterminal/` folder, which is excluded from git: they never appear in `git status` and are never committed. Every project and every new feature worktree gets one automatically; an existing `plan.md` is carried over as the plan's goal.
+
+- **Tasks are gone; plans and agent messages stay.** The Tasks board, the task tools agents used (`todo_*`, `assign_todos_to_agents`), autopilot runs, cross-project task handoffs, the "Create tasks with" button on the Plan tab and Settings › Tasks are removed, along with the `tterminal todo` CLI commands and the `/api/todos` HTTP routes. What remains is the Plan of each project and feature, and agents asking each other questions or handing each other work through `agent_ask`. Agents connected to tterminal are now told to write a plan you ask for into the Plan tab (through `plan_update`) instead of creating a Markdown file in your repository. Existing task data is left on disk but no longer shown. **Close completed automatic agents** now lives in Settings › Workflow.
+
+- The Checks panel's live output no longer grows and shrinks while a check runs. It is now a fixed two-line glance at what the check is doing right now; hover a line to read it in full.
+
+- Fixed automatic operation agents failing to finish ("the tterminal window did not apply complete … — is a project open?") after the first agent had already finished since tterminal started. The pane stayed open and the workspace didn't refresh. Every agent can now finish, however many finished before it.
+
+- Fixed Codex agents failing to finish an automatic operation ("agent_finish requires a tterminal-managed agent"), so their pane never closed and the workspace never refreshed. Codex hides tterminal's pane id from MCP tools; tterminal now works out which pane the agent is running in by itself. The same fix gives Codex agents the right name in Messages and in `whoami`.
+
+- Fixed `php artisan dev` (and other commands that run several processes side by side) leaving `artisan serve`, queue workers, Pail and Vite running after you stopped, restarted or closed them. Each restart left another server behind, until Laravel reported "Failed to listen on 127.0.0.1:8000 … 8007 (Address already in use)". Stopping a command now stops everything it started. Servers orphaned by earlier versions keep running until you quit them (or restart your Mac).
+
+- Fixed Escape in Project settings: it no longer reaches the agent behind the window (which interrupted it), and in the Edit command dialog it closes only that dialog instead of the whole settings window. Selecting text in a command field and releasing the mouse outside the dialog no longer closes it.
+
+- Dev servers now shut down cleanly when you remove a project, when tterminal relaunches after an update, and when an agent stops or closes them through MCP. Before, these were killed outright, so Laravel projects could be left with a stale `public/hot` file that broke page styles until it was deleted. Force kill is still immediate.
+
+- Fixed clicking a branch or project in the sidebar sometimes landing on a different branch (or on a branch when you clicked the project itself) when it belonged to another project. One click now opens what you clicked.
+
+- **Pause and Resume** for agents and commands (pane header or ⋯ menu): Pause freezes the process where it is and Resume continues it, with nothing lost. The old pause-looking button was Interrupt, which sends ⌃C and ends most commands. It now has its own icon.
+
+- Fixed Restart moving an agent or command tab to the end of its group. A restarted tab now keeps its place.
+
+- **Hand off to another agent:** from an agent's ⋯ menu, pick another agent, add an optional instruction, and it starts in the same folder with the previous agent's recent terminal output as its first message. You can stop the original agent in the same step.
+
+- **Summarize what it did:** from a running agent's ⋯ menu, get a short bullet recap of its session (what it changed, where it stands) in a dialog you can copy. It uses the Summarizer tool chosen in Settings › Agents › Auto-summarization; automatic summaries do not need to be on.
+
+- **Restart and resume conversation** for Claude Code and Codex agents (pane ⋯ menu or right-click the tab): restarts the agent and picks its most recent conversation in that folder back up (`claude --continue` / `codex resume --last`) instead of starting empty. A plain Restart still starts fresh.
+
+- **Mouse controls for every tab.** A pane shown as a tab now has a header with its name, status, memory, and **Interrupt**, **Restart** and **Stop** buttons (**Start** once stopped), so you no longer need ⌘⇧S / ⌘⇧R. Its **⋯** menu (also on right-click of the tab, and on each split slot's header) adds Force kill, Find / Copy / Save / Clear output, Jump to top or bottom, Send prompt template, Rename, Copy agent ID, Reveal folder in Finder, Open folder in editor, Copy path and Close. Dev servers show their port as a clickable `:5173 ↗` chip, with Copy URL and Edit command in the menu.
+
+- **Find in output:** press ⌘F in any terminal to search its scrollback. Matches are highlighted; ⏎ / ⇧⏎ step through them and esc closes the bar.
+
+- **Pull from origin** and **Push to origin** now run git directly, so a clean pull or push finishes in about a second with no agent pane. If git fails (diverged history, rejected push, conflicting local edits), your Git operations agent starts automatically with git's error message and resolves it. **Commit all changes** still uses the agent.
+
+- Projects with at least one open feature branch now stay under **Active** in the sidebar, even when no agent or terminal is running.
+
+- The new-feature dialog now closes the moment you click **Create**; progress shows as a *Creating worktree…* row in the sidebar, and the dialog reopens with the error if creation fails.
+
+- Clicking a file in Changes (or a commit in History) now moves the highlight to it, so arrow keys continue from where you clicked instead of the first row.
+
+- Main-project Workflow now shows when origin has new commits ("3 new commits on origin/main") with a one-click Pull, plus ↓/↑ counts on Pull and Push. The app fetches origin quietly in the background (on focus and every 5 minutes, never touching your files); **Check** fetches immediately. This replaces the agent-driven Fetch origin button. Fetching uses your existing credential helper or ssh-agent and never prompts.
+
+- Suppressed the automatic macOS Writing Tools popup in workspace windows to mitigate a native crash seen while typing in agent terminals. Embedded browser pages keep their existing behavior.
+
+- Fixed a feature branch showing as merged after you pressed Update from main because a different branch had merged. Merged detection now only counts the branch's own commits.
+
+- Replaced the menu-bar waiting count and project list with a resource dashboard: current-project CPU/RAM charts, system RAM, app-host memory, installed version, and update controls. Clicking the icon opens it directly below the menu bar without raising the main window; clicking again hides it, and moving into the dashboard keeps it open. Live refreshes no longer rebuild and dismiss the menu while you move over it.
+
+- Main-project Workflow now offers Refresh, Commit all changes, Fetch origin, Pull from origin, and Push to origin. Fixed existing Pull/Push controls being hidden for GitHub-backed projects. Commits stay local until you choose Push; Git operations use the configured Git agent.
+
+- MCP autorun guidance now defaults to parallel independent tasks and automatic progress tables at startup, each observed stage change, and completion. You no longer need to request periodic reports; explicit serial execution and quiet-mode preferences are respected.
+
+- Fixed a black window when font downloads stall during startup or a webview reload. The interface now paints using local fallback fonts without waiting for internet access.
+
+- Fixed release and production diagnostic builds failing to compile after adding Stop checks.
+
+- Added Stop checks to branch Workflow. It stops the running check and skips the remaining queue; stopped checks can be run again and do not unlock PR or merge.
+
+- Shortened the Workflow’s Pull request stage label to PR to prevent wrapping.
+
+- Added Workflow as the first tab in the right panel. Checks, pull requests, merge/archive actions, and Git controls now live there, leaving Files, Changes, and History more room. New feature workspaces open on Workflow.
+
+- The startup screen now lists saved projects to choose from. Add and ⌘T require a selected workspace, so opening a terminal no longer silently selects the first project.
+
+- Reordered the Add menu pages to Plan, Tasks, Browser, then Timeline.
+
+- Added Plan to the main project workspace’s tab-bar + menu. Edit or preview a project plan, plan with an agent, create project-level tasks, and review changes without creating a feature branch.
+
+- The new-feature dialog now has one compact Create feature button. Creating a branch no longer automatically starts the Planner; start planning from the feature’s Plan tab.
+
+- The command-copy picker now excludes Shell and other terminal launcher entries.
+
+- Project Settings › Commands now lets you copy selected saved commands from another project. Choose a source project, pick the presets, and save; existing commands are kept.
+
+- Fixed open file tabs losing unsaved edits and jumping to the top after switching tabs or workspaces. Drafts, cursor position, scrolling, and undo history now stay with each open file.
+
+- New MCP autopilot runs use separate implementation and review capacity, with related review batches of up to three tasks. Independent feature worktrees can run in parallel; tasks sharing a checkout stay serialized.
+- Reviews flush early for blockers, urgency, wait limits, and partial final batches. Every task keeps its own verdict, and shared reviewers remain open until all members finish.
+- Autopilot status now reports phase/queue timings and batch membership to help diagnose slow runs. Existing saved runs keep their previous scheduling behavior.
+
+- Connected ⌘Z and ⌘⇧Z, along with Edit → Undo/Redo, to the focused file editor’s undo history.
+
+- Fixed file drag-and-drop uploads in the embedded browser by letting websites handle dropped files.
+
+- Opening a folder now switches to that project’s workspace, including when returning from Universal Shell to an already-open project.
+
+- Fixed ⌘O (Open Folder) doing nothing after opening a project. It now works in project and Universal workspaces, including while typing in a terminal.
+
+- The Universal Shell tab-bar `+` now opens a terminal immediately, without a launcher menu or workspace options.
+
+- Universal Terminals now appears under Active while a shell is running, instead of being placed below inactive projects.
+
+- Universal terminals now show a dedicated Universal Shell header instead of the last project's name and branch. Their workspace hides project tools and supports multiple shell tabs and splits in your home directory.
+- Review agents fix issues within their assigned scope and verify the result instead of sending fixes back to an implementer.
+- Automatically created task, review, test-fix and Git agents close when finished. Disable this in App Settings › Tasks; manually opened agents stay open.
+- PR creation and merging refresh their next action on completion, with clearer progress and a corrected merge watcher.
+- Main project checkouts now offer Pull from origin and Push to origin through the Git operations agent.
+- The feature cleanup button is now simply Archive.
+
+- Project config saves default to Commit on every save, consistently across settings and command edits. Manual and Ignore remain available. Unrelated staged changes are excluded, and commit failures show a warning without losing saved settings.
+- Failed checks have a View failure dialog with readable command output, exit status and Fix with Implementer, replacing the clipped hover tooltip.
+
+
+- Feature checks show completed-check percentage, the active check number, elapsed time and live command output. The percentage measures finished checks; individual tools may not report their own progress.
+
+
+- Browser tabs now explain failed pages and missing scripts/styles, with Retry, details, and Open externally. Browser failures appear in diagnostics reports, and tabs wait for their viewport to be ready before opening.
+- New Laravel/Herd workspace profiles configure Vite with the feature site's HTTPS certificate, preventing blank React pages and missing admin styles caused by HTTP development assets. Existing workspaces need their Vite certificate paths updated and the Dev process restarted; standard saved Herd profiles receive the missing defaults for future features.
+
+
+- Reduced project-switching work: file watchers no longer index every file for rename matching, and eight recent projects keep their watchers ready for reuse.
+- Terminal resizing skips hidden panes and unchanged grids and avoids measuring layout twice, while preserving shell prompt layout and scrollback position.
+- Git changes refresh feature information only for the affected project instead of refreshing every project in the sidebar.
+
+- Reviewing your own pull request no longer offers Approve or Request changes, which GitHub refuses for the author; the panel says so and keeps Comment.
+
+- While the sidebar has focus, ⌘↑ and ⌘↓ walk its project and feature rows, and ⌘[ and ⌘] jump from project to project.
+
+- ⌘← and ⌘→ now move keyboard focus between the three columns (sidebar, workspace, panel), wrapping around. Tabs switch with ⌘[ and ⌘], which used to focus the next or previous running process; that action is still available as ⌘⇧↓ / ⌘⇧↑ and ⌘↓ / ⌘↑, and can be rebound in Settings › Keybindings.
+
+- Adding a project no longer opens the Add agent window afterwards; the project simply opens, and agents start from its + menu when you want one.
+
+- ⌘P now switches to the project you pick instead of opening the old project menu, which is gone along with the hidden project rail that hosted it. Managing commands from a launcher goes to Project settings.
+
+- Fixed reopening a feature's browser after closing its serve tab showing a dead page: the dev server is started again whenever the browser is shown without one, and the page reloads as soon as it answers.
+
+- The timeline moved from a fold under the features to its own page: hover a project row and click the calendar icon (or pick Timeline from the main checkout's + menu) to see what shipped on a full-width rail, with Copy as Markdown and Release notes in the header.
+
+- Laravel projects served by Herd no longer start a dev server when their browser tab opens; the site is already there, and running Vite or a build is your call from the tab bar. Fixed the browser's first open sometimes starting two serve tabs.
+
+- Fixed feature setup failing on its first step in projects whose profile clones folders from the main checkout: the runner executed the step's label instead of its command.
+
+- Fixed a feature created in a project whose Worktrees settings were saved before this release getting no `.env` and no per-feature rewrites: those older settings are now completed from the stack profile (copy, clone, environment, serve, checks, share) while keeping your own setup and archive lines. Retry setup on an existing feature also restores the files it is missing.
+
+- The sidebar now groups projects into Active (something is running in them) and Inactive, active ones first. The Worktrees profile is a dropdown instead of a row of chips, the timeline is drawn on a vertical rail with dated dots, and the New feature dialog no longer lists the share command in its preview.
+
+- Review someone else's work in its own worktree: the New feature dialog's "From a branch or PR" tab lists open pull requests and remote branches, and opening one gives you the same browser, editor and agents you have for your own features. The panel offers Review all with your Reviewer, Approve, Request changes and Comment, review comments can be posted to the pull request in one click, and Archive removes only your local copy.
+
+- Share a feature: the browser toolbar's Share button publishes the site on a public URL (Herd's share, or a Cloudflare quick tunnel for Next.js, Vite, Django and FastAPI projects) and copies the link once the tunnel is up. Expo, React Native and Flutter projects copy the address a phone on the same Wi-Fi can open.
+
+- A feature that falls behind its base now says so before merge time: the sidebar row shows `behind n`, and the feature panel offers Update from main, which rebases the worktree (conflicts hand over to Rebase with agent). Merge waits until the branch is up to date.
+
+- Each project gains a Timeline fold under its features: what was merged or dropped, when, with the pull request, the lines changed and the tasks it carried. Copy it as Markdown, or draft release notes from the features merged since the last tag and hand them straight to `gh release create`.
+
+- Project settings › Worktrees now shows your stack as a profile: the header names what was detected, one click on a profile chip fills in its defaults, and the block is edited as rows instead of text areas: the `.env` keys rewritten per feature, folders to clone, files to copy, setup, the dev-server command, check rows and archive. Your branch prefix and merge method stay when you switch profiles.
+
+- The New feature dialog starts with what you are about to do. Type it and the branch name follows; pick the base branch from a freshly fetched list (origin/main, develop, a release branch) without touching your main checkout; choose Feature, Bugfix (`fix/`) or Experiment (`try/`) to set the prefix and seed the plan with matching headings; see exactly what the stack profile will run; and press Create & plan to have your Planner start as soon as setup finishes.
+
+- A Checks stage now sits before Pull request in the feature panel when the project's stack defines checks (lint, tests, typecheck, build). Run them from the panel, watch each row pass or fail with its timing, and hand a failing row to your Implementer with one click. Create pull request unlocks once every row passes on the current commit; a new commit sends the rows back to queued, and the sidebar shows `checks n failing` until they are green.
+
+- Each feature can run its own dev server. Projects whose stack has a serve command (Next.js, Vite, Expo, Django, FastAPI, Laravel without Herd, or Vite beside Herd) start it on the feature's own port the first time you open the feature's browser tab, and the tab waits until the server answers. The sidebar row shows the port with a green, amber or grey dot, the browser toolbar shows the server with its uptime and a restart button, and the row's right-click menu can start, restart or stop it. The server runs as a normal `serve` tab, so its output is one click away.
+
+- Creating a feature is faster and its copy of `.env` now works: the folders listed under Worktrees (such as `vendor` and `node_modules`) are cloned from the main checkout in an instant before the install runs, and the per-feature keys (`APP_URL`, `CACHE_PREFIX`, `VITE_PORT` for Laravel) are rewritten so the feature's site, cookies and Vite server point at the feature, not the main checkout.
+
+- New projects get worktree defaults for more stacks: Django, FastAPI and plain Python (uv, Poetry or pip), Expo and React Native, and Flutter, alongside Laravel, Next.js and Vite. Each proposal now also lists the folders to clone from the main checkout, the `.env` keys to rewrite per feature (Laravel gets `APP_URL`, `CACHE_PREFIX` and `VITE_PORT`), a dev-server command and the checks to run. Existing projects keep their saved settings.
+
+- Sidebar rows are tidier: a project shows its expand/collapse arrow only when it has features underneath, and every feature row starts with a small dot in the project's color, lined up under the project's thumbnail.
+
+- Right-click an agent's tab to copy its agent ID, ready to paste into another agent for direct agent-to-agent messages.
+
+- Fixed duplicated prompt lines after dragging a terminal into a workspace slot or otherwise revealing it at a new width.
+
+- Multi-pane workspaces are back. The tab bar's + menu (⌘T) ends with a Workspace row: pick 2 columns, 3 columns or 2×2 to open an empty workspace tab, then drag tabs into its slots or add terminals from a slot. Double-click the tab to rename it. Closing a workspace tab returns its panes to ordinary tabs instead of stopping them. The Tabbed layout and saved workspaces, which had no way to be created, are gone.
+
+- Sidebar project rows now show the main checkout the way feature rows are shown: a spinner while an agent is working there, the branch, and the uncommitted +/− lines. Hover the numbers for the changed and untracked file counts.
+
+- Improved tab reordering with a preview that stays under your pointer, a clearer insertion marker, reliable drops between tabs, and automatic scrolling along crowded tab bars. Press Escape to cancel a drag.
+
+- Fixed sidebar project thumbnails showing image data as text. Projects now show their uploaded image or their generated letters when no image is set.
+
+- Updated Settings → Tasks and MCP help to match review-and-finish, including guidance for older custom reviewer prompts.
+
+- Moved sidebar project colors to the cards’ outer left borders, removing the inner colored line for a cleaner layout.
+
+- Fixed user-created terminal tabs disappearing after quitting and reopening the app. With Restore stopped tabs enabled, they remain available to restart across repeated launches.
+- Command-K now offers New agent… for every project, using the agent picker even when no agent has previously been saved. New terminal remains available for projects with terminals enabled, including projects without existing processes.
+
+- Sidebar projects now sit in subtle panels with more space between groups, taller headers, and clearer project names, making it easier to see which processes belong together.
+
+- Task reviewers now review, fix, and finish ordinary issues themselves. Unresolved reviews escalate instead of automatically cycling back to implementation. MCP guidance now covers coherent task planning, independent concurrency, concise handoffs, and separately requested final audits.
+
+- Prevented overlapping Git refreshes from flooding the backend. Git scans and diff reads use bounded background workers, while routine badges skip per-file line counts. Diagnostics now distinguish Git queueing and execution time.
+
+
+- Spread terminal resize work across frames to reduce multi-pane resize bursts while preserving final terminal geometry.
+- Improved diagnostics with automatic stall context, separate resize-stage timings, output backlog and pane metrics, and longer useful event history. Live metrics fetch summaries rather than full recordings.
+- The diagnostics card can be minimized. Exported recordings now offer Copy path and Reveal in Finder actions.
+
+
+- Added a production diagnostics build with performance recording and WebKit developer tools, using your existing production data and MCP connection.
+
+### Upgrade notes
+
+- Existing projects keep working unchanged; the main checkout shows
+  project-level tasks. Feature worktrees live under
+  `~/tterminal/worktrees.noindex/<project>/<slug>` by default (App Settings).
+- Notifications now name the feature an agent belongs to.
+
 ## v1.0.3
 
 ### Highlights
