@@ -15,6 +15,34 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v1.1.1
+
+A polish release: a deeper dark theme, a cleaner sidebar, and a way out
+when a reviewer agent never reports back. Nothing to do after updating.
+
+### Improvements
+
+- **Deeper dark theme.** Dark mode is now *Slate Sky Deep*: the same slate
+  greys and system blue, one step darker, with the terminal and pages sitting
+  clearly inside the window. Light mode is unchanged.
+
+- **Cleaner sidebar.** Features hang off their project on a thin guide line
+  in the project's color, active projects get a colored ring, the selection
+  fades out instead of filling the row, and badges are compact tags. Same
+  layout and behavior as before.
+
+- **Mark reviewed.** When a reviewer agent finishes without reporting back,
+  the Review step no longer stays stuck on "not reviewed": press
+  **Mark reviewed** under the Review button (Undo is right there). A reviewer
+  that exits cleanly now also counts as finished. Once everything is
+  reviewed, the step folds down to its status instead of offering
+  "Review again", and finished steps show a plain green check.
+
+### Fixes
+
+- **No Diagnostics button in release builds.** The bug icon in the sidebar
+  footer now appears only in the Dev and diagnostics builds.
+
 ## v1.1.0
 
 ### Highlights
