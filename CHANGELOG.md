@@ -15,6 +15,30 @@ matters, and whether they need to do anything after updating.
 
 No unreleased changes yet.
 
+## v1.1.2
+
+A visual polish release: badges and buttons now look the same everywhere,
+and the stray white borders are gone. Nothing to do after updating.
+
+### Improvements
+
+- **One badge style everywhere.** Status badges, tags and counts in the
+  sidebar, Plan, Changes, the file viewer, settings, the command palette and
+  the status bar now share one shape and one set of colors, each with a single
+  meaning: blue for in progress, green for done, amber for needs attention,
+  red for broken, violet for merged. *Approved* and *reviewed* are now green.
+
+- **Consistent buttons.** Buttons across the app now come in three sizes and
+  a few clear styles (main action, secondary, cancel, destructive, approve),
+  with the same corners and the same hover everywhere.
+
+### Fixes
+
+- **No more white borders on badges.** The PR badge in the sidebar, the
+  *reviewed* tag on commits and several success, warning and error boxes drew
+  a bright white outline instead of their own tinted border. They now use
+  their color, like every other badge.
+
 ## v1.1.1
 
 A polish release: a deeper dark theme, a cleaner sidebar, and a way out
