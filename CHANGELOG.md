@@ -8,6 +8,38 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.1
+
+*October 2026.* A Tauri kit, one list of checks, and a simpler New tab.
+
+### Stack kits
+
+- **Tauri.** Open a Tauri project and the Stack tab knows it: *Run app*
+  (`⌘J R`) starts `tauri dev` and shows the build as it goes (crates
+  compiled, rebuilding after a Rust edit, window open). Compile errors and
+  panics come with file and line and *Send to agent*. Health runs clippy,
+  tsc, ESLint, `cargo test` and `cargo fmt --check`; after an agent turn only
+  the checks for what changed run. Actions build the release `.app` and
+  `.dmg`, regenerate ts-rs bindings, make icons, and start iOS or Android dev.
+  The app doesn't start when you open the project, because the first Rust
+  build takes minutes.
+
+### Changed
+
+- **A simpler New tab.** The `+` now sits right after Plan and Messages and
+  stays there however many tabs you open. Its menu has Terminal, Claude,
+  Codex, Timeline, the three grids and *Run a command…*, each with a single
+  key: `⌘T` then `C` opens Claude. Saved commands moved out of this menu;
+  they're in the Stack tab and `⌘J`.
+- **One list of checks.** Stack › Health now holds every check. Switch on
+  *Before a pull request* for a check (lint, typecheck and tests are on by
+  default) and the Workflow tab's Checks stage runs it on the whole project.
+  If a check already passed on that commit with nothing uncommitted, it isn't
+  run again and shows *from Health*. Checks you had under Project settings ›
+  Worktrees keep running; *Move to Stack* there puts them in Health.
+- **New tabs open beside you.** Whatever you open goes right after the tab
+  you're in, not at the end of the strip.
+
 ## v0.2.0
 
 *October 2026.* tterminal starts a new version line here: 0.2.0 is the
