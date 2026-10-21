@@ -8,6 +8,95 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.2
+
+*October 2026.* A simpler Stack tab with one "Next" step, branches that
+open an agent for you, ideas in the plan that start their own branch, and
+dev logs side by side.
+
+### The Stack tab
+
+- **Workflow became one "Next" card.** Column 3 is now *Stack* and
+  *Changes*. Stack starts with a card that says the one thing to do now
+  ("Commit 3 changed files", "Review 2 commits, then push", "Tests fails, so
+  no PR yet", "Create pull request") and gives you that button. Everything
+  you need only sometimes (Pull, Push, review again, update from main,
+  archive…) is in its ⋯ menu. When there's nothing to do it just says
+  "Up to date with origin". A new branch says "Nothing to ship yet" instead
+  of showing disabled buttons. *Commit all* moved to the Changes tab, and
+  Health tags the checks that must pass before a pull request with **PR**.
+  `⌘3` now switches between the two tabs.
+- **Stack cards collapse.** Services, Health, Actions, Open, Routes and
+  Detected fold down to one line with a status dot: green when everything
+  runs or passes, amber when only part of it does, red when it's stopped or
+  failing. The line still says the count ("2 of 2 running"). A card that
+  turns red opens on its own once, so a crash or a failing test is never
+  hidden. What's open is remembered per project.
+- **Check results in one place.** The "Claude finished" card is gone. After
+  an agent's turn, Health leads with one line ("Claude finished · checked 4
+  changed files") above the same rows it always shows, with *Send to Claude*
+  when something failed. The checks run before a pull request show their
+  rows in Health too. Error lines a turn left in the logs show on Services.
+  If a turn fails while you're looking elsewhere, you get one toast; a clean
+  turn just turns Health green.
+- **The Stack tab waits for a new branch.** While a branch is still setting
+  up or installing, its services, checks and actions are blurred and can't
+  be clicked, and each card says what it's waiting for. `⌘J` tells you the
+  same instead of opening. Links stay clickable.
+
+### Branches and agents
+
+- **New branches open an agent for you.** The new-feature dialog has
+  *Start Claude when the branch is ready* (your project's Implementer) and
+  what it gets: your idea sent, your idea in its input for you to send, or
+  nothing. Once the branch's setup has finished, the agent opens in the
+  worktree. It's a normal agent that stays open when it's done, ready for
+  follow-ups. Your choice is remembered per project; untick the first box
+  to create a branch without an agent.
+- **Start building an idea from the plan.** Write ideas as phases in your
+  project's plan. Each one gets a **Start building** button: it opens the
+  new-branch dialog already filled in from the phase, and asks what Claude
+  should get: the phase sent so it starts right away, the phase typed into
+  its input for you to edit and send, or nothing. The new branch's plan gets
+  the phase and its steps, and the idea in your project plan shows the
+  branch it's being built on, with **Open**. Once the branch is merged, the
+  phase counts as done.
+- **New branches start their dev server by themselves.** When a workspace
+  is missing `vendor` or `node_modules` (a fresh branch) and its dev server
+  starts on open, the Stack tab installs the dependencies first and then
+  starts the server — no more *Install*, then *Start*. Meanwhile the dev
+  card is covered by a placeholder saying what it waits for (the branch
+  setup, the install, then the start), with nothing to click. If the
+  install fails, its output stays on the card and automatic startup waits,
+  even if the install left partial dependency folders behind. **Retry
+  install** stays available in that case; after a successful retry the
+  pending checks run and the server starts.
+
+### Dev page
+
+- **Dev logs side by side.** The Dev page now shows each process (server,
+  queue, logs, vite…) in its own column, using the full height, instead of
+  short stacked rows. A lane with errors gets more room, and a quiet one
+  like vite folds into a thin strip you can click to open. A Columns / Rows
+  switch in the page header is remembered per project, and a narrow window
+  shows rows by itself.
+
+### Changed
+
+- **Commands are easier to spot.** A running command (a dev or build
+  server) and a terminal now get the same size tile as Claude and Codex
+  in the tab bar and the sidebar, with a play or prompt icon, instead of
+  a small faint arrow.
+
+### Fixed
+
+- **Clear in Messages clears everything.** A message that had been stuck as
+  "queued" or "waiting for reply" for a long time (its agent long gone)
+  survived every Clear. Clear now keeps only replies sent within the last
+  hour, which can still arrive. Clear also asks in a proper dialog now,
+  with how many messages it hides, instead of squeezing "Clear all?" into
+  the filter row.
+
 ## v0.2.1
 
 *October 2026.* A Tauri kit, one list of checks, and a simpler New tab.
