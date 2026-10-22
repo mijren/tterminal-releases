@@ -8,6 +8,36 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.3
+
+*October 2026.* Agents that open a feature branch for you (with your OK),
+a Health card that lists each check once and agrees with itself, and one
+button style across the app.
+
+- **Agents can start a feature branch for you.** Tell an agent "make this a
+  feature" (or let it suggest one) and it opens the New feature dialog
+  already filled in: name, base branch, template, plan, and a handoff
+  message with everything you discussed. Edit anything, press *Create*, and
+  the worktree is set up and an agent starts in it with the handoff, so you
+  continue the work there. The agent can ask for Claude or Codex with a
+  model and effort, and the dialog shows that choice for you to keep or
+  change. Once the new agent is running, the first one gets its ID so it can
+  keep talking to it. *Cancel* tells the agent you said no. Agents use the
+  new `feature_start` MCP tool; nothing is created without your click.
+- **A tidier Health card.** Each check is one row with its name on top and
+  what it ran on underneath, so nothing wraps into broken lines in the
+  narrow column. The before-PR run is now a single line above the rows
+  (running, new commit since it ran, what failed) instead of a second list
+  of the same checks, and its results fill the rows themselves, so the
+  banner and the rows never disagree. The card only says "all passing" when
+  every check has actually run.
+- **One button style everywhere.** Buttons now come in two sizes: small
+  inside panels and cards, and a step larger in dialogs and settings. Only
+  the main action of a card or dialog is filled; everything else is
+  outlined or plain text. The oversized Start dev, Restart / Stop and Hot
+  reload buttons and the mixed-size dialog footers are gone, and Approve is
+  no longer solid green.
+
 ## v0.2.2
 
 *October 2026.* A simpler Stack tab with one "Next" step, branches that
