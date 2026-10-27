@@ -8,6 +8,28 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.4
+
+*October 2026.* Health without the extra bar: each check's row shows its
+own progress and live output. The agent review before a pull request is
+optional, and the Next card's ⋯ menu no longer gets cut off.
+
+- **No more before-PR bar in Health.** The "Before-PR checks passed on
+  this commit" / "New commit since…" bar is gone. Each PR check's row shows
+  its own spinner, ✓ or ✕, the running row shows its latest two lines of
+  output underneath, a failed row has *View* for its output and *Fix*,
+  and the Next card still tells you when a new commit needs the checks
+  again.
+- **Agent review before a pull request, when you want it.** Once the PR
+  checks pass, the Next card shows *Create pull request* with *Review with
+  Claude* (or your Reviewer) beside it. Review first if you like, or go
+  straight to the PR: it no longer stops to ask about unreviewed commits.
+- **The Next card's ⋯ menu fits in the window.** It now opens aligned to the
+  right edge of its button and measures itself, so long items like *Review
+  3 commits with Claude* are no longer cut off at the edge of the window.
+  Shared sidebar, pane, and file menus keep the same 8px gap from the window
+  edges, including when opened near the top.
+
 ## v0.2.3
 
 *October 2026.* Agents that open a feature branch for you (with your OK),
