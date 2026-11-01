@@ -8,6 +8,54 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.5
+
+*November 2026.* A calmer, more premium Stack tab: one spinner per run,
+Health rows that line up, the same ▶ ■ ↻ controls on every stack, and a
+Next card that shows the commits or files it's about to act on.
+
+- **One spinner per run in Stack.** Running tests used to light up a
+  spinner in the Health header, another beside it, one on the Next card
+  and one on the agent's turn. Now only the row that's actually running
+  moves: a slim ring with *Running tests…*, what it covers and a live
+  timer. Headers stay still and say what's running, folded cards show a
+  thin sweeping line, checks waiting their turn read *up next*, and the
+  Next card fills a progress bar while the PR checks run. Pulsing dots
+  are gone too, and the cards have a cleaner finish.
+- **Health reads at a glance.** Every check is one tidy row: its name,
+  then the result in colour (*3 passed*, *2 errors*, *up to date*) with
+  the details after it, and a *Run* button in the same place on every row,
+  including a *Check* button for migrations that are up to date. The card's
+  status (*all passing*) now sits next to the title, and *Run all* is a
+  proper button, so you can tell the two apart. The tests bar and the
+  separate *Run all tests* button are gone.
+- **One set of run controls everywhere.** Services, checks, actions and
+  the dev server all use the same ▶ play, ■ stop and ↻ restart icons
+  instead of a mix of *Start*, *Run*, *Stop* and *Restart* buttons. The dev
+  server's controls sit once, in its header (no more second Stop / Restart
+  row under it). The Services card gets *Start all* / *Stop all* next to
+  its title, like Health's *Run all*. Commands such as *Build assets* now
+  show a terminal icon instead of a play icon.
+- **A calmer Next card.** It now shows the commits it's about to review,
+  push or open a pull request with, then one button bar: the main action
+  (*Push*, *Create pull request*) on the right and the optional move
+  (*Review with Claude*) with ⋯ on the left, so the next step no longer
+  sits in a row of look-alike buttons.
+- **Logs sits with the dev server's controls, and every lane opens.** The
+  *Logs* button moved from the bar under the dev card up to its header,
+  next to restart and stop. On the Dev page, quiet lanes no longer fold
+  into thin strips: every process's column opens expanded.
+- **Every stack looks the same.** The Flutter app card now matches the
+  dev server card: the device, its status, then *Logs* and ⚡ hot reload,
+  ↻ hot restart and ■ stop in its header, instead of a separate *Hot
+  reload* / *Restart* row and a *Logs* button in the bottom bar. *Run on
+  your device* uses the same ▶ button, the Dev page's header uses ↻ ■ ▶
+  too, and a Tauri rebuild shows one spinner instead of two.
+- **The commit step shows what you're committing.** When you have
+  uncommitted changes, the Next card now lists the first changed files with
+  their +/− counts above *Commit all*, the same way it lists the commits
+  before a review or push.
+
 ## v0.2.4
 
 *October 2026.* Health without the extra bar: each check's row shows its
