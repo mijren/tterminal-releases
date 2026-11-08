@@ -8,6 +8,31 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.6
+
+*November 2026.* A real Logs page, Stack cards that fit the sidebar, and a
+few fixes for things that got in the way.
+
+- **Logs is a proper viewer now.** The Logs button opens one full page with
+  a tab per process (server, queue, vite, each Flutter device…) and an *All*
+  tab that interleaves them in the order they arrived. Each line has its
+  time, errors stand out in red with *Copy* and *Send to agent* (the error
+  and its stack trace), and long stack traces fold after six frames. Find
+  with ⌘F, show *Errors only*, toggle wrapping, copy what's shown or clear
+  the screen. Links open in your browser and `file:line` references open
+  the file in your editor. It follows new output until you scroll up, then
+  offers *Jump to latest*.
+- **Stack cards fit the sidebar.** Device and service names no longer get
+  cut to "iPh…": each card has a header with the name and status, its
+  details below, and the controls in a row of their own. A stopped service
+  folds to a single line.
+- **Remove a Flutter screenshot.** Hover a device's screenshot and press ×
+  to clear it from the card.
+- **Running clocks keep counting.** A running test's timer no longer
+  restarts from zero when you switch to another project and come back.
+- **Cleaner Health rows.** The *PR* tag next to each check's name is gone;
+  Ship still waits on the same checks.
+
 ## v0.2.5
 
 *November 2026.* A calmer, more premium Stack tab: one spinner per run,
