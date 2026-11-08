@@ -8,6 +8,38 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.7
+
+*November 2026.* Start a new project without leaving tterminal, and an
+*Add project* that no longer freezes the app.
+
+- **New project.** *✦ New* at the bottom of the sidebar (or *create a new
+  one from a template* on the welcome screen) makes a project for you:
+  Laravel, Flutter, Next.js, Python (uv), Tauri, an empty folder, or your
+  own command. Pick where it goes and a name, and tterminal runs the
+  framework's own installer.
+  - **Its questions become cards.** Starter kit, testing framework,
+    package manager… each question the installer asks shows up as a card
+    you answer with a click or the arrow keys, in whatever order and
+    wording the installer uses today. Nothing is hard-coded, so a question
+    Laravel adds next month shows up too. You can always type into the
+    installer's own output instead.
+  - **Answers are remembered.** Tick *Save this answer* and the next
+    project from that template answers it for you; the dialog lists what it
+    will answer, and ✕ forgets one.
+  - **Ready to work.** Git is set up on your branch with a first commit
+    (the installer's own commit is kept when it makes one), and the project
+    opens in its workspace with its dev server already starting.
+  - **Nothing half-made.** Closing the dialog or pressing *Stop* while the
+    installer runs asks first. Stopping, or an installer that fails,
+    removes everything it made so *Try again* starts fresh; a failure keeps
+    the installer's output so you can see why.
+- **Add project no longer freezes the app.** On macOS 27, opening the folder
+  picker (*Add project* in the sidebar, the welcome screen or ⌘O) could hang
+  the whole window, especially while a terminal was busy, until you
+  force-quit. The *Save output* panel had the same problem. Both open
+  normally now.
+
 ## v0.2.6
 
 *November 2026.* A real Logs page, Stack cards that fit the sidebar, and a
