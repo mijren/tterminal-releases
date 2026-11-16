@@ -8,6 +8,36 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.8
+
+*November 2026.* One chat that runs your features for you, a Stop button
+for a whole project, and a cleaner + menu.
+
+- **The Orchestrator: one chat that runs your features.** On a project's
+  main checkout, press **+** › *Orchestrator* (or ⌘T then O) and tell it
+  what you want built.
+  - **It makes the branches.** Once you agree on the work it creates the
+    feature branches itself, no dialog, and you stay in the chat. They show
+    up under your project as usual, each with an agent already working.
+  - **It talks to the agents.** Feature agents bring their questions to the
+    Orchestrator; it answers what it can and brings you only what it
+    can't decide, saying which branch is asking.
+  - **It ships.** When an agent reports done, it runs the checks, sends any
+    failures back to be fixed, and opens the pull request. It always asks
+    you in the chat before merging, then archives the merged branch.
+  - Pick which agent plays it, and its model, in Project settings ›
+    Agents › Orchestrator. Unset, it's your Implementer.
+- **Stop a whole project from the sidebar.** Hover a project that has
+  something running and click ■ *Stop project*: every agent, terminal,
+  command and dev server in the project and its features stops, along with
+  the Stack's dev command and any Flutter app. Your feature branches stay.
+- **A simpler + menu.** Terminal first, then a divider and the agents:
+  Orchestrator, Claude, Codex, every row the same height. Claude and Codex
+  start straight away on their usual model; the model and effort pickers
+  are gone. The menu's dividers now show in dark mode too.
+- **Timeline is gone** from the + menu and from the project row's hover
+  actions.
+
 ## v0.2.7
 
 *November 2026.* Start a new project without leaving tterminal, and an
