@@ -8,6 +8,80 @@ description: Product updates, release highlights, and upgrade notes for ttermina
 Notable changes to tterminal, written for the people who use it: what changed,
 why it matters, and whether you need to do anything after updating.
 
+## v0.2.9
+
+*November 2026.* Watch Claude's subagents work live, fixes for a crash
+while agents edit files and a blank window after sleep, and a broad security
+and reliability pass.
+
+- **Safer development profiling.** The local report endpoint rejects foreign
+  web pages, invalid JSON, and oversized reports, and handles file errors safely.
+
+- **Updated native security dependencies.** Git bindings, TLS validation,
+  compression, XML parsing, and runtime dependencies have received available
+  security fixes.
+
+- **Updated development tools.** Patched frontend build and test dependencies
+  remove known advisories in Vite, Vitest, PostCSS, and their dependencies.
+
+- **Lighter Activity inspection.** Expanding a terminal's process tree reads
+  only those processes instead of first sampling the whole machine.
+
+- **Cancelling project setup stays cancelled.** Cancellation waits for an
+  active preparation step, then removes the unfinished project and skips later
+  setup stages instead of continuing into Git or reporting success.
+
+- **Less code at startup.** The Changes editor and syntax languages now load
+  when you first open Changes, reducing the initial JavaScript download.
+
+- **Feature status stays current.** Review badges, repository state, and
+  archived feature details update reliably. Changes arriving during a refresh
+  are picked up afterward, and closed projects stay out of the sidebar.
+
+- **MCP connections stay within your Mac account.** Both ends verify the
+  connecting account before exchanging requests. Socket cleanup also preserves
+  unrelated files and other accounts' sockets.
+
+- **Safer API credential storage.** Replacing the local API token now repairs
+  permissive file permissions and avoids writing through symlinks or exposing
+  a partially saved token.
+
+- **Local CLI traffic stays local.** The `tterminal` CLI bypasses shell proxy
+  settings and refuses redirects, keeping its API token and terminal traffic
+  on the local connection.
+
+- **Reliable simultaneous saves.** Concurrent state saves use separate private
+  temporary files, preventing partial state or failed saves when agents and the
+  app save at the same time.
+
+- **Bounded terminal buffering.** Heavy terminal and installer output now
+  slows its producer when delivery falls behind, keeping queued output from
+  growing without limit while preserving every byte and the final output.
+
+- **Watch a Claude subagent work.** When Claude sends a helper agent off to
+  work in its own worktree, that row now says *agent* in the sidebar, and
+  opening it shows the agent live instead of an empty workspace: its task,
+  what it's doing right now, its newest edit typing itself out under a
+  moving cursor, and a feed of every file it read or changed and every
+  command it ran. When it finishes you get a summary of what it changed,
+  and the row leaves the sidebar once the agent cleans up its worktree.
+
+- **Fixed a sudden crash while agents edit files.** Counting changed lines
+  could take the whole app down when an agent or a build rewrote a file at
+  the same moment. Those counts and the Changes diffs are now read in a
+  separate git process, so a race only skips one refresh.
+
+- **Remove a Flutter device and pick another.** Each device on the Stack
+  tab's Services card now has an × that stops the app there and takes the
+  device off the card. If it was the device *Run* used last, *Run* asks you
+  to pick a device again instead of reopening the same simulator.
+
+- **No more blank window after sleep.** Coming back to a Mac that slept
+  (seen on a nearly empty battery) could leave the window showing nothing
+  but its background. tterminal now checks the window when you return or
+  focus it, repaints it, and reloads it if it doesn't answer. Your
+  terminals and agents keep running through the reload.
+
 ## v0.2.8
 
 *November 2026.* One chat that runs your features for you, a Stop button
